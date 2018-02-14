@@ -21,18 +21,8 @@ publication = "In *Journal of the National Medical Association*."
 publication_short = ""
 
 # Abstract and optional shortened version.
-abstract = "**Objectives**
-To examine race differences in how generalized mistrust, mistrust in physicians, and mistrust in psychiatric medication shape the willingness to utilize psychiatric medication.
-
-**Methods**
-Data was used from two waves (1998 and 2006) of the U.S. General Social Survey a representative sample of non-institutionalized Americans. We analyzed data for 343 African American and 1,920 white adults, ages 18–89. The data included measures of the respondents’ willingness to utilize psychiatric medication as well as measures of generalized mistrust, mistrust in physicians, and mistrust in psychiatric medication. We employed ordinary least squares regression to test whether these three forms of mistrust reduce the black-white gap in psychiatric drug usage and whether race moderates the association between any type of mistrust and the willingness to endorse psychiatric medication utilization.
-
-**Results**
-Mistrust in physicians and psychiatric medication is related to less willingness to utilize psychiatric medicines for both African Americans and whites; however, paradoxically, these forms of mistrust decrease psychiatric drug usage more steeply for whites.
-
-**Conclusions**
-The pattern of findings in this study suggests that trust or low levels of mistrust, rather than high levels of mistrust, actually maintains the black-white difference in the use of psychiatric medication."
-abstract_short = ""
+abstract = "**Objectives**: To examine race differences in how generalized mistrust, mistrust in physicians, and mistrust in psychiatric medication shape the willingness to utilize psychiatric medication. **Methods**: Data was used from two waves (1998 and 2006) of the U.S. General Social Survey a representative sample of non-institutionalized Americans. We analyzed data for 343 African American and 1,920 white adults, ages 18–89. The data included measures of the respondents’ willingness to utilize psychiatric medication as well as measures of generalized mistrust, mistrust in physicians, and mistrust in psychiatric medication. We employed ordinary least squares regression to test whether these three forms of mistrust reduce the black-white gap in psychiatric drug usage and whether race moderates the association between any type of mistrust and the willingness to endorse psychiatric medication utilization. **Results**: Mistrust in physicians and psychiatric medication is related to less willingness to utilize psychiatric medicines for both African Americans and whites; however, paradoxically, these forms of mistrust decrease psychiatric drug usage more steeply for whites. **Conclusions**: The pattern of findings in this study suggests that trust or low levels of mistrust, rather than high levels of mistrust, actually maintains the black-white difference in the use of psychiatric medication."
+#abstract_short = ""
 
 # Featured image thumbnail (optional)
 image_preview = ""
@@ -43,7 +33,7 @@ selected = false
 # Projects (optional).
 #   Associate this publication with one or more of your projects.
 #   Simply enter the filename (excluding '.md') of your project file in `content/project/`.
-projects = [""]
+#projects = [""]
 
 # Links (optional).
 url_pdf = ""
