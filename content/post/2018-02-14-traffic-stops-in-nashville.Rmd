@@ -1,0 +1,114 @@
+---
+title: Traffic Stops in Nashville
+author: Peter Vielehr
+date: '2018-02-14'
+slug: traffic-stops-in-nashville
+categories: []
+tags:
+  - police
+  - traffic-stops
+---
+
+#Hit-rate for Searches
+
+Hit rates are an important way to investigate racial bias in search decisions. If a police officer decides to conduct a discretionary search, they make the decision based on their perceived likelihood of finding evidence of a crime. Probable cause searches, in particular, have an evidentiary burden where the officer must meet the reasonable person standard set by the Supreme Court. The officer must have articulable facts and circumstances that a reasonable officer would believe indicates a crime. If a particular demographic group is more likely to possess contraband, the standard of evidence being applied to that group is higher. Conversely, if a demographic group is less likely to have evidence, officers are more likely to search that group with a lower standard of evidence. 
+
+
+
+```{r, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(plotly)
+load(file = "/Users/petervielehr/Box Sync/traffic stops/TrafficStops_2017_coded.Rdata")
+
+```
+
+
+##First, code some summary statistics
+
+The following code takes all traffic stops from 2017, groups them by race and gender, removes the stops where gender is unknown, then calculates search and hit rates. Rates are presented as percentages.
+
+```{r}
+race.gender.stats<-coded2017%>%
+  group_by(Sex, race)%>%
+  filter(Sex!="U")%>%
+  summarise(n=n(),
+            pcevidence=sum(evidence[probablecause==1], na.rm=T),
+            consentevidence=sum(evidence[consentsearch==1], na.rm=T),
+            probablecause=sum(probablecause, na.rm=T),
+            consentsearch=sum(consentsearch, na.rm=T),
+            evidence=sum(evidence, na.rm=T),
+            drugs=sum(drugs, na.rm=T),
+            weapons=sum(weapons, na.rm=T),
+            allsearch=sum(search, na.rm=T)) %>%
+  mutate(probcause.rate=round((probablecause/n)*100, digits = 2),
+         consent.rate=round((consentsearch/n)*100, digits = 2),
+         allsearch.rate=round((allsearch/n)*100, digits = 2),
+         allsearch.hitrate=round((evidence/allsearch)*100, digits = 2),
+         probcause.hitrate=round((pcevidence/probablecause)*100, digits = 2),
+         consent.hitrate=round((consentevidence/consentsearch)*100, digits = 2),
+         race.gender=paste(race, Sex, sep = ", "))
+ 
+```
+
+##Make some plots
+
+
+
+```{r, echo=TRUE}
+p <- race.gender.stats %>% plot_ly(
+  x = ~race.gender,
+  y = ~probcause.hitrate,
+  type = "bar",
+  color = ~race
+) %>%
+  layout(title = "Hitrate During Probable Cause Searches",
+         xaxis = list(title = ""))
+p
+```
+
+It looks like police are most likely to find evidence when they search white drivers suggesting that they use a lower standard of evidence when deciding to search black drivers compared to white drivers.
+
+#Try a logistic regression
+
+###First with only race/gender categories
+
+```{r}
+
+pcdata<-subset(coded2017, coded2017$probablecause==1)
+mod<-glm(evidence~ black.male + black.female + hispanic.male + hispanic.female +
+           otherrace.male + otherrace.female + white.female , 
+         data = pcdata, family = "binomial")
+summary(mod)
+
+
+```
+
+But...these results might be confounded by other factors. Let's controll for age, the precinct the stop ocurred in, and whether the stop was investigatory (i.e. the police made the stop based on suspicion rather than a traffic violation).
+
+```{r}
+
+mod2<-glm(evidence~ black.male + black.female + hispanic.male + hispanic.female +
+           otherrace.male + otherrace.female + white.female +
+            Age.of.Suspect + precinct + invstop, 
+         data = pcdata, family = "binomial")
+
+summary(mod2)
+
+```
+
+```{r results='asis'}
+
+stargazer::stargazer(mod, mod2, type = "html", style = "asr")
+
+```
+
+
+
+
+
+
+
+
+
+

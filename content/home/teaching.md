@@ -15,8 +15,50 @@ weight = 60
 
 +++
 
-This is an example of using the *custom* widget to create your own homepage section.
 
-I am a teaching instructor for the following courses at University X:
+### Vanderbilt University
 
-- SOC 1020: Contemporary Social Issues
+**Instructor:**
+
+Summer 2016 & Fall 2016
+: SOC 1020: Contemporary Social Issues
+
+**Teaching Assistant**
+
+Fall 2017
+: SOC 3621: Criminology
+
+Spring 2017	
+: SOC 3624: Prison Life
+
+Spring 2015 & 2016	
+: SOC 3001: Sociological Perspectives (Classical Theory)
+
+Fall 2015
+: SOC 2100: Statistics for Social Scientists
+
+Fall 2014	
+: SOC 1001: Introduction to Sociology
+
+Spring 2014	
+: MHS 2430: Social Capital and Health
+
+Spring 2013	
+: SOC 3304: Race, Gender, and Health
+
+Fall 2013	
+: SOC 3002: Introduction to Social Research
+
+### San Fancisco State University
+
+**Teaching Assistant**
+
+Spring 2012	
+: Cross Cultural Sex and Gender
+
+Fall 2010	
+: Variations on Human Sexuality
+
+
+
+
