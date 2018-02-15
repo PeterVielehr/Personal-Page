@@ -5,6 +5,15 @@
     
     <url>
     
+      <loc>/ceramics/ceramics-page/</loc>
+      <lastmod>2018-02-14T00:00:00-06:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/traffic-stops-in-nashville/</loc>
       <lastmod>2018-02-14T00:00:00+00:00</lastmod>
     </url>
@@ -97,6 +106,16 @@
     <url>
     
       <loc>/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/ceramics/</loc>
+      <lastmod>2018-02-14T00:00:00-06:00</lastmod>
       <priority>0</priority>
     </url>
     

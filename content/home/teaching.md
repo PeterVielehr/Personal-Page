@@ -23,7 +23,7 @@ weight = 60
 Summer 2016 & Fall 2016
 : SOC 1020: Contemporary Social Issues
 
-**Teaching Assistant**
+**Teaching Assistant:**
 
 Fall 2017
 : SOC 3621: Criminology
@@ -51,7 +51,7 @@ Fall 2013
 
 ### San Fancisco State University
 
-**Teaching Assistant**
+**Teaching Assistant:**
 
 Spring 2012	
 : Cross Cultural Sex and Gender

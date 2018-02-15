@@ -43,4 +43,4 @@ weight = 5
 
 I am a Ph.D. candidate in sociology at Vanderbilt University. My research focuses on social inequality and health in intimate relationships. I primarily do quantitative work on social stratification, social networks, race, gender, sexuality, and the life course. Additionally, I have been working on participatory action research addressing racial disparities in policing. Outside of sociology, I have a passion for social justice, active community participation, fermentation, and local vegan foods.
 
-I am interested in working with community groups and scholars to use data to for social change. Contact me at peter.vielehr@gmail.com for more information or to collaborate on future projects.
+I am interested in working with community groups and scholars to use data to for social change.

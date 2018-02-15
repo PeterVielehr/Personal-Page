@@ -33,8 +33,8 @@ filter_default = 0
   tag = "*"
 
 [[filter]]
-  name = "Other"
-  tag = ".demo"
+  name = "Police"
+  tag = "*"
 
 +++
 
