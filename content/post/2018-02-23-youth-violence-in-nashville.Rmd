@@ -183,10 +183,13 @@ ggplotly(gg3)
 knitr::include_graphics("/Users/petervielehr/Box Sync/Gideons Army/DensityMaps2016_Page_4.jpg")
 ```
 
-
-![Locations of Gun Violence](/img/DensityMaps2016_Page_4.jpg)
+### Locations of Gun Violence
+![](/img/DensityMaps2016_Page_4.jpg)
 
 -Total Population, Homicide Rate, and Violent Crime Rate sourced from Annual Crime Analysis Report of 2016 Crime Statistics, MNPD, Strategic Development Division. 
+
 -Youth Population sourced from US Census Bureau Factfinder. PEPAGESEX-Geography-Davidson County, Tennessee: Annual Estimates of the Resident Population for Selected Age Groups by Sex.
+
 -Non-Fatal Gunshot Victim Rate, Youth Homicide Rate, Youth Non-Fatal Gunshot Victim Rate, and Youth Violent Crime Rate sourced from MNPD ARMS on 11/15/2017.
+
 -Additional Notes: “Violent Crimes” refer only to the categories of homicide, rape, robbery, and aggravated assault. Information is sourced from incident reports using UCR definitions and reporting guidelines, based on the date when the crime was reported. 
