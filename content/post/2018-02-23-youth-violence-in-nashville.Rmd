@@ -74,7 +74,7 @@ ggplotly(gg2)
 
 ```{r, results="asis"}
 
-kable(youthdf,format = "latex", booktabs=T, col.names=datalabel, caption = "Youth Crime Rates per 100,000 Youth under 18", format.args = list(big.mark = ",")) %>%
+kable(youthdf,format = "html", booktabs=T, col.names=datalabel, caption = "Youth Crime Rates per 100,000 Youth under 18", format.args = list(big.mark = ",")) %>%
   column_spec(column = 4, width = "10em")%>%
   column_spec(column = 5, width = "10em")%>%
 kable_styling(latex_options = c("striped", "hold_position"))
