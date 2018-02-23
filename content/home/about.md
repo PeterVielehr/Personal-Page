@@ -13,7 +13,8 @@ weight = 5
     "Sociology",
     "Social Psychology",
     "Criminology",
-    "aging and the Life Course"
+    "Aging and the Life Course",
+    "Quantitative Methods"
   ]
 
 # List your qualifications (such as academic degrees).
