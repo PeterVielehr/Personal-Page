@@ -42,6 +42,4 @@ weight = 5
 
 # Biography
 
-I am a Ph.D. candidate in sociology at Vanderbilt University. My research focuses on social inequality and health in intimate relationships. I primarily do quantitative work on social stratification, social networks, race, gender, sexuality, and the life course. Additionally, I have been working on participatory action research addressing racial disparities in policing. Outside of sociology, I have a passion for social justice, active community participation, fermentation, and local vegan foods.
-
-I am interested in working with community groups and scholars to use data to for social change.
+I am a Ph.D. candidate in sociology at Vanderbilt University. My dissertaion research focuses on the mental and physical health impacts of proactive policing in Nashville. More broadly, I am interested in how structures of social control (i.e. police, prisons, probation, parole) contribute to inequality accross the life course. I use quantitative and computational methodologies to investigate complex social issues.
