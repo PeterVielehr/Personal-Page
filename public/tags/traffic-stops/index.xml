@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Traffic-stops on Peter Vielehr</title>
+    <link>/tags/traffic-stops/</link>
+    <description>Recent content in Traffic-stops on Peter Vielehr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 14 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/traffic-stops/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Traffic Stops in Nashville</title>
+      <link>/post/traffic-stops-in-nashville/</link>
+      <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/traffic-stops-in-nashville/</guid>
+      <description>Hit-rate for Searches Hit rates are an important way to investigate racial bias in search decisions. If a police officer decides to conduct a discretionary search, they make the decision based on their perceived likelihood of finding evidence of a crime. Probable cause searches, in particular, have an evidentiary burden where the officer must meet the reasonable person standard set by the Supreme Court. The officer must have articulable facts and circumstances that a reasonable officer would believe indicates a crime.</description>
+    </item>
+    
+  </channel>
+</rss>

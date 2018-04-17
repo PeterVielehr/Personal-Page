@@ -23,6 +23,9 @@ weight = 60
 Summer 2016 & Fall 2016
 : SOC 1020: Contemporary Social Issues
 
+[Summer 2016 Syllabus](/files/SOC 1020_Summer 2016.pdf)  
+[Fall 2016 Syllabus](/files/SOC 1020_Fall 2016.pdf)
+
 **Teaching Assistant:**
 
 Fall 2017
