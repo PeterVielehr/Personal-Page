@@ -5,7 +5,25 @@
     
     <url>
     
+      <loc>/post/loy-canyon-to-secret-mountain-trail-sedona/</loc>
+      <lastmod>2018-05-26T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/roadtrip-2018/</loc>
+      <lastmod>2018-05-26T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/post/upper-yosemite-falls-hike/</loc>
       <lastmod>2018-05-26T00:00:00+00:00</lastmod>
     </url>
     
@@ -154,6 +172,26 @@
     
       <loc>/tags/health/</loc>
       <lastmod>2018-02-13T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/hiking/</loc>
+      <lastmod>2018-05-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/hiking/</loc>
+      <lastmod>2018-05-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

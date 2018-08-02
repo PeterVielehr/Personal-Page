@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hiking on Peter Vielehr</title>
+    <link>/tags/hiking/</link>
+    <description>Recent content in Hiking on Peter Vielehr</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sat, 26 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/hiking/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Loy Canyon to Secret Mountain Trail-Sedona</title>
+      <link>/post/loy-canyon-to-secret-mountain-trail-sedona/</link>
+      <pubDate>Sat, 26 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/loy-canyon-to-secret-mountain-trail-sedona/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>Upper Yosemite Falls Hike</title>
+      <link>/post/upper-yosemite-falls-hike/</link>
+      <pubDate>Sat, 26 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/upper-yosemite-falls-hike/</guid>
+      <description> </description>
+    </item>
+    
+  </channel>
+</rss>
