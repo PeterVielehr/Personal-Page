@@ -220,11 +220,6 @@ defaultContentLanguageInSubdir = false
     link = "mailto:Peter.S.Vielehr@Vanderbilt.edu"
 
   [[params.social]]
-    icon = "twitter"
-    icon_pack = "fa"
-    link = "//twitter.com/PeterVielehr"
-
-  [[params.social]]
     icon = "google-scholar"
     icon_pack = "ai"
     link = "https://scholar.google.com/citations?hl=en&user=xnKYlL4AAAAJ&view_op=list_works&citft=1&citft=2&email_for_op=Peter.Vielehr%40gmail.com&gmla=AJsN-F7SNC2WLBOn3c0m-qVa1RzVwDcq_MNW596AsOGdASqN8Sj4BtcUavj7x4l00rORAOkVMp4haY6Haozi3VtoRoesPkA7R-bNVmwXyJ1EWvsKYUKgrJ4NbRlZDhQJyFQUYtCdQJrlxgGnEt9QcLpgvgl8UK0AWDCEzkAePQB55fOOSKsrAkBVk7Zc7jxMOSwR3sMX3PsmkwJY7O7a3Ubkw4GotJ9eIXCe6Y1bSJAm6fP9KKAbYLIZrD0ZijjTCfKw6vrG8zQe"

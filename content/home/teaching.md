@@ -15,6 +15,15 @@ weight = 60
 
 +++
 
+### Nashville State Community College, Turney Center Industrial Complex
+
+Turney Center Industrial Complex is a medium security state prison in middle Tennessee.
+
+Fall 2018
+: SOCI 1020: Social Problems
+
+Summer 2018
+: [SOCI 1010: Introduction to Sociology](/files/SOCI 1010-Syllabus-5-31-18.pdf)
 
 ### Vanderbilt University
 
