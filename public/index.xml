@@ -320,7 +320,7 @@ Delke Z-Score&lt;sup&gt;a&lt;/sup&gt;
 &lt;/table&gt;
 &lt;p&gt;Table 1 shows Officer Delke’s total stops, stops of black drivers, and percent of drivers who were black in each zone. For all officers, the average percentage and the standard deviation of the mean is shown. Finally, officer Delke’s z-scores show the number of standard deviations his rate is from the mean.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%201-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.&lt;/p&gt;
+&lt;p&gt;In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large amount about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;searches&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Searches&lt;/h1&gt;
