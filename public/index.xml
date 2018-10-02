@@ -19,10 +19,13 @@
       <description>&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
+<<<<<<< HEAD
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&#34;/files/Delke_Report.pdf&#34;&gt;Click here to download a pdf copy of this report&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;All data and code used to generate this report can be found on my &lt;a href=&#34;http://github.com/PeterVielehr/Delke-Report&#34;&gt;Github page&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+=======
+>>>>>>> 5cbff0c4e4980b202db589fe965c44a4769a552f
 &lt;p&gt;Officer Delke shot Daniel Hambrick in the back while he was running away on July 26, 2018. He was hired by MNPD on July 1, 2016 and on December 28, 2016 was assigned to the East Precinct. The first traffic stop record for Officer Delke is from March 4, 2017 while assigned to the South Precinct. Following his assignment to East Precinct (from December 28, 2016 to February 24, 2017), Officer Delke spent two months in South Precinct (February 25, 2017 to April 20, 2017) before moving to North Precinct and finishing out 2017. On January 7, 2018, Officer Delke was assigned to East Precinct. Subsequently, Officer Delke was assigned to the Juvenile Crimes Task Force.&lt;/p&gt;
 &lt;p&gt;Data for this analysis come from public records requests of MNPD’s Form 252 database and employee demographics. Following each traffic stop, officers are required to submit a 252 form and the record is collected in the database. Additional employee data come from an officer demographic and assignment database received through a public records request covering 2010 through the end of 2017.&lt;/p&gt;
 &lt;p&gt;Between March 4, 2017 and July 26, 2018, Officer Delke conducted 510 traffic stops (not including his stop of Daniel Hambrick). Of these, 364 (71.4%) were of black drivers and 118 (23.1%) were of white drivers. He conducted 45 searches (8.8% of all stops) and found evidence in a total of 15 searches (12 searches with drugs, 0 with weapons, and 6 with other evidence) for a hit-rate of 33.3%. When comparing searches by race, he conducted 39 searches of black drivers (86.7% of total searches; 10.7% of all black drivers stopped) and 3 searches of white drivers (6.7% of total searches; 2.5% of all white drivers stopped). He found evidence in 13 searches of black drivers (33.3%) and one search of a white driver.&lt;/p&gt;

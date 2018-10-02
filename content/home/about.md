@@ -21,7 +21,7 @@ weight = 5
 [[education.courses]]
   course = "PhD Candidate in Sociology"
   institution = "Vanderbilt University"
-  year = 2019
+  year = Expected 2019
 
 [[education.courses]]
   course = "MA in Sociology"
