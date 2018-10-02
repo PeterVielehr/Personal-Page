@@ -1,0 +1,353 @@
+---
+title: Analysis of Officer Delke’s Traffic Stops and Searches
+author: Peter Vielehr
+date: '2018-10-02'
+slug: analysis-of-officer-delke-s-traffic-stops-and-searches
+categories: []
+tags:
+  - police
+  - traffic-stops
+  - Crime
+header:
+  caption: ''
+  image: ''
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<ul>
+<li><p><a href="/files/Delke_Report.pdf">Click here to download a pdf copy of this report</a></p></li>
+<li><p>All data and code used to generate this report can be found on my <a href="http://github.com/PeterVielehr/Delke-Report">Github page</a></p></li>
+</ul>
+<p>Officer Delke shot Daniel Hambrick in the back while he was running away on July 26, 2018. He was hired by MNPD on July 1, 2016 and on December 28, 2016 was assigned to the East Precinct. The first traffic stop record for Officer Delke is from March 4, 2017 while assigned to the South Precinct. Following his assignment to East Precinct (from December 28, 2016 to February 24, 2017), Officer Delke spent two months in South Precinct (February 25, 2017 to April 20, 2017) before moving to North Precinct and finishing out 2017. On January 7, 2018, Officer Delke was assigned to East Precinct. Subsequently, Officer Delke was assigned to the Juvenile Crimes Task Force.</p>
+<p>Data for this analysis come from public records requests of MNPD’s Form 252 database and employee demographics. Following each traffic stop, officers are required to submit a 252 form and the record is collected in the database. Additional employee data come from an officer demographic and assignment database received through a public records request covering 2010 through the end of 2017.</p>
+<p>Between March 4, 2017 and July 26, 2018, Officer Delke conducted 510 traffic stops (not including his stop of Daniel Hambrick). Of these, 364 (71.4%) were of black drivers and 118 (23.1%) were of white drivers. He conducted 45 searches (8.8% of all stops) and found evidence in a total of 15 searches (12 searches with drugs, 0 with weapons, and 6 with other evidence) for a hit-rate of 33.3%. When comparing searches by race, he conducted 39 searches of black drivers (86.7% of total searches; 10.7% of all black drivers stopped) and 3 searches of white drivers (6.7% of total searches; 2.5% of all white drivers stopped). He found evidence in 13 searches of black drivers (33.3%) and one search of a white driver.</p>
+<p>These figures cannot be interpreted in isolation. A large research literature on racial profiling shows that proving racial bias on the part of an individual using aggregate data is not possible. Researchers have developed ways to infer whether racial bias may be taking place but there are many methodological challenges in doing so. A central concern is the definition of racial profiling and racial bias. Profiling and bias refer to an individual’s decision making process when deciding who to pull over or search (Glaser 2014). The MNPD policy manual defines racially biased policing as using race as the <em>sole</em> reason for initiating a police action. Race can be a reason for making a stop as long as another legal reason for making the stop is stated. If a legal reason for making a stop exists, it can be used as a pretext to initiate a stop and investigate whether other violations are occurring. For example, as stated in the arrest affidavit of Officer Delke, “because Officer Delke understood that part of the [Juvenile Crimes] Task Force directive was to make traffic stops, he continued to follow to see if he could develop a reason to stop the Impala.”</p>
+<p>There are also different methodological issues in analyzing the decision to make a traffic stop and the decision to search a vehicle. For making a stop, the risk that an individual is pulled over depends on the composition of the driving population in the area the stop is made and the driving behavior of the drivers. This is referred to as the benchmarking or denominator problem (Fridell 2004). There may be racial differences in the quantity, quality, and location of driving that could influence the likelihood of a traffic stop being made. Many of the neighborhoods where Officer Delke worked have high populations of black residents, some as high as 80-90% black. Therefore, the driving population in those areas is likely to be primarily black. For this analysis, the location of traffic stops will be taken into account based on MNPD’s patrol zones. Additionally, determining whether a rate of traffic stops is justifiable is challenging. One strategy to get around using benchmarks from outside data sources (like the US Census) is to use an “internal benchmark.” An internal benchmark is calculated based on all officers that patrol a given area. This gives the normative rate which can then show whether a specific officer is outside of the norm for similarly situated officers. If an officer shows a consistent disparity compared to other officers across many zones, he or she may be using biased criteria when deciding to stop a vehicle. However, it is also possible that non-bias reasons may account for differences.</p>
+<p>When analyzing the decision to search at a stop, the underlying population at risk of a search is known since a driver has to have been stopped in order to get searched. The rate of searches is a bit more straight forward than decisions to stop a vehicle, but there are still limitations (Knowles, Persico, and Todd 1999; Rojek, Rosenfeld, and Decker 2012). There may be bias-neutral reasons for a racial disparity in searches. For instance, drivers may have different probabilities of displaying suspicious behavior across race or officers may come in contact with different rates of suspicious activity. However, comparing to other officers provides a standard for comparison. While officers experiences are unique, there should be some similarities between officers in regard to deciding when to conduct a search.</p>
+<p>Finally, hit rates show whether different levels of suspicion are being applied to groups (Persico and Todd 2006). Categorical differences, when found, show that a group has a lower or higher threshold used to initiate a search, though some limitations are discussed in the research literature (Simoiu, Corbett-Davies, and Goel 2016). For instance, there may be group differences in the rates of carrying evidence. Applying a hit rate analysis to individuals is also challenging since the population that each officer has searched is usually small and a single instance of finding evidence can alter the hit rate drastically. Take, for example, an officer who conducts five searches. Each instance of finding evidence would change her or his hit rate by 20%. That large swing makes hit rates less reliable when applied to individuals. Some modeling strategies can be used to adjust for this, but they are not addressed in this brief report.</p>
+<div id="traffic-stops" class="section level1">
+<h1>Traffic Stops</h1>
+<p>As discussed above, an analysis of traffic stops must take into account the location of the stop and use a legitimate comparison in order to contextualize and rates. To do this, I calculated the percent of stops made that were black drivers for every officer in every patrol zone. I selected zones where Officer Delke made more than 10 stops and excluded any officer who made less than 10 stops. This produced 1004 Officer-Zone observations. Figure 1 shows the distribution of officers’ rate of stopping black drivers in each patrol zone. The bluish line represents officer Delke in the distribution.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:table 1)Officer Delke’s Traffic Stops by Zone Compared to All Officers in Zone
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+Officer Delke
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+All Officers
+</div>
+</th>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Zone
+</th>
+<th style="text-align:right;">
+Total Stops
+</th>
+<th style="text-align:right;">
+Black Drivers Stopped
+</th>
+<th style="text-align:right;">
+% Black
+</th>
+<th style="text-align:right;">
+Mean Black %
+</th>
+<th style="text-align:right;">
+SD % Black Stops
+</th>
+<th style="text-align:right;">
+Delke Z-Score<sup>a</sup>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 3em; ">
+211
+</td>
+<td style="text-align:right;width: 3em; ">
+41
+</td>
+<td style="text-align:right;width: 3em; ">
+23
+</td>
+<td style="text-align:right;width: 3em; ">
+56.1
+</td>
+<td style="text-align:right;width: 3em; ">
+53.5
+</td>
+<td style="text-align:right;width: 3em; ">
+16.1
+</td>
+<td style="text-align:right;width: 3em; ">
+0.16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; ">
+221
+</td>
+<td style="text-align:right;width: 3em; ">
+179
+</td>
+<td style="text-align:right;width: 3em; ">
+126
+</td>
+<td style="text-align:right;width: 3em; ">
+70.4
+</td>
+<td style="text-align:right;width: 3em; ">
+58.5
+</td>
+<td style="text-align:right;width: 3em; ">
+14.6
+</td>
+<td style="text-align:right;width: 3em; ">
+0.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; ">
+223
+</td>
+<td style="text-align:right;width: 3em; ">
+95
+</td>
+<td style="text-align:right;width: 3em; ">
+68
+</td>
+<td style="text-align:right;width: 3em; ">
+71.6
+</td>
+<td style="text-align:right;width: 3em; ">
+59.2
+</td>
+<td style="text-align:right;width: 3em; ">
+12.5
+</td>
+<td style="text-align:right;width: 3em; ">
+0.99
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; font-weight: bold;color: red;">
+225
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+10
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+9
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+90.0
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+44.6
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+14.2
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+3.19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; ">
+227
+</td>
+<td style="text-align:right;width: 3em; ">
+35
+</td>
+<td style="text-align:right;width: 3em; ">
+14
+</td>
+<td style="text-align:right;width: 3em; ">
+40.0
+</td>
+<td style="text-align:right;width: 3em; ">
+37.3
+</td>
+<td style="text-align:right;width: 3em; ">
+10.5
+</td>
+<td style="text-align:right;width: 3em; ">
+0.26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; font-weight: bold;color: red;">
+413
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+15
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+11
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+73.3
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+43.9
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+14.6
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+2.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; ">
+613
+</td>
+<td style="text-align:right;width: 3em; ">
+16
+</td>
+<td style="text-align:right;width: 3em; ">
+12
+</td>
+<td style="text-align:right;width: 3em; ">
+75.0
+</td>
+<td style="text-align:right;width: 3em; ">
+84.4
+</td>
+<td style="text-align:right;width: 3em; ">
+10.3
+</td>
+<td style="text-align:right;width: 3em; ">
+-0.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; font-weight: bold;color: red;">
+621
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+27
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+23
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+85.2
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+70.8
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+15.0
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+0.96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; font-weight: bold;color: red;">
+623
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+34
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+33
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+97.1
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+86.4
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+8.7
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+1.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3em; font-weight: bold;color: red;">
+625
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+13
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+12
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+92.3
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+69.5
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+22.2
+</td>
+<td style="text-align:right;width: 3em; font-weight: bold;color: red;">
+1.03
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border:0;" colspan="100%">
+<sup>a</sup> Number of Standard Deviations From Mean
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Table 1 shows Officer Delke’s total stops, stops of black drivers, and percent of drivers who were black in each zone. For all officers, the average percentage and the standard deviation of the mean is shown. Finally, officer Delke’s z-scores show the number of standard deviations his rate is from the mean.</p>
+<p><img src="/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%201-1.png" width="672" /></p>
+<p>In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.</p>
+</div>
+<div id="searches" class="section level1">
+<h1>Searches</h1>
+<p>While there is likely some geographic variation in the probability that a search will occur (i.e. where a car is pulled over contributes to suspicion or more suspicious people are pulled over in certain areas), it is probably a reasonable assumption that, in general, searches would be conducted based on uniform criteria. If one officer makes more searches than others, she or he is either being unequally exposed to people who meet search criteria or are applying different criteria to initiate a search. Additionally, since searches only occur in a small percentage of stops, breaking them out by zone and officer would not produce interpretable results. This analysis includes all patrol zones in Davidson County</p>
+<p>The percentage of drivers that is searched is a highly-skewed distribution. Most officers conduct few searches. To limit the sample to those who regularly make traffic stops, I focused on officers who had made more than 100 stops in the two-year time span (N=670 officers). With the high skew, the mean is not reflective of the true central tendency. Instead, the median splits the distribution with half the officers below and half above. The median percentage of drivers who are searched is 2.6%. Half of officers have a lower search rate, half are above. Officer Delke conducted a search at 8.8% of stops. This rate is 3.4 times the median rate. His rate places him at the 88 percentile for searches of all drivers.</p>
+<p>Focusing on black drivers, the median rate of searches for the same sample of officers is 3.8%. Office Delke searched 10.7% of black drivers he searched. His rate places him at the 85.8 percentile for searches of black drivers.</p>
+<p><img src="/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%202-1.png" width="672" /></p>
+<p><img src="/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/bar%20graph-1.png" width="672" /></p>
+</div>
+<div id="hit-rates" class="section level1">
+<h1>Hit Rates</h1>
+<p>Analyzing hit rates becomes challenging because many officer have not conducted enough searches to calculate stable percentages. Hit rates are usually calculated in aggregate. I selected only officers who had made more than 100 stops in the two-year period and had conducted more than five searches of black drivers (N=340 officers). Many officers did not find evidence. The median officer found evidence in 26.1% of searches. For only black drivers, the median was 26.5%. Officer Delke found evidence in 33.3% of searches. Since Officer Delke only conducted three searches of white drivers, his hit-rate does not change when focusing on only black drivers. Officer Delke’s hit rate is within the norm for officers and slightly higher than the average.</p>
+<p><img src="/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/hit%20rate-1.png" width="672" /></p>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<p>This report aimed to compare Officer Delke’s traffic stop and vehicle search practices with other officers in the areas he patrolled and in MNPD as a whole. In general, Officer Delke’s traffic stops and vehicle searches paint a picture of an officer who stopped and searched black drivers more aggressively than his peers. His traffic stop rate was above his fellow officers in several of the zones he patrolled. His rate of searching black drivers stands out in particular as being disproportionate to his peers. His rate of finding evidence in these searches was 33.3%, in line with other officers. His hit rate also means that 66.7% of people he searched did not have evidence of any crime.</p>
+<p>In the Driving While Black Report, Gideon’s Army made several recommendations for decreasing the racial disparity of traffic stops and searches in Nashville. One recommendation included using “data analytic and machine learning tools…to reduce officer-level racial disparities in traffic stops made, searches conducted, and traffic stop outcomes” (Gideon’s Army 2016:179). One example of a department instituting this type of monitoring is Charlotte-Mecklenburg Police Department which worked with researchers to develop an early intervention system for officers at risk of “adverse events” (Carton et al. 2016).The data-driven system in Charlotte-Mecklenburg is more effective than relying on supervisors expertise in identifying at risk officers.</p>
+<p>Based on this analysis of Officer Delke’s racial disparities in traffic stops and vehicle searches, he would likely have been flagged for early intervention if MNPD had instituted the recommended action for data-driven monitoring of officer’s disparate racial impact. This case also points to the need of an independent oversight board which would be able to recommend policy changes and monitor data on officer actions.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<ul>
+<li>Carton, Samuel et al. 2016. “Identifying Police Officers at Risk of Adverse Events.” Pp. 67–76 in Proceedings of the 22Nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, KDD ’16. New York, NY, USA: ACM. Retrieved (<a href="http://doi.acm.org/10.1145/2939672.2939698" class="uri">http://doi.acm.org/10.1145/2939672.2939698</a>).</li>
+<li>Fridell, Lorie A. 2004. “By the Numbers: A Guide for Analyzing Race Data from Vehicle Stops.” Police Executive Research Forum Washington, DC.</li>
+<li>Gideon’s Army. 2016. <em>Driving While Black: A Report on Racial Profiling in Metro Nashville Police Department Traffic Stops</em>. Nashville.</li>
+<li>Glaser, Jack. 2014. <em>Suspect Race: Causes and Consequences of Racial Profiling</em>. Oxford University Press, USA.</li>
+<li>Knowles, John, Nicola Persico, and Petra Todd. 1999. “Racial Bias in Motor Vehicle Searches: Theory and Evidence.” <em>Journal of Political Economy</em> 109(1):203–29.</li>
+<li>Persico, Nicola and Petra Todd. 2006. “Generalizing the Hit Rates Test for Racial Bias in Law Enforcement, with an Application to Vehicle Searches in Wichita.” <em>The Economic Journal</em> 116(515).</li>
+<li>Rojek, Jeff, Richard Rosenfeld, and Scott Decker. 2012. “Policing Race: The Racial Stratification Of Searches In Police Traffic Stops.” <em>Criminology</em> 50(4):993–1024.</li>
+<li>Simoiu, Camelia, Sam Corbett-Davies, and Sharad Goel. 2016. “Testing for Racial Discrimination in Police Searches of Motor Vehicles.” SSRN abs 2811449.</li>
+</ul>
+</div>
