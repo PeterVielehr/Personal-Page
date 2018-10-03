@@ -34,6 +34,12 @@
 &lt;p&gt;Determining whether a rate of traffic stops is justifiable is challenging. One strategy to get around using benchmarks from outside data sources—like the US Census—is to use an “internal benchmark.” An internal benchmark is calculated based on all officers that patrol a given area. This gives the normative rate which can then show whether a specific officer is outside of the norm for similarly situated officers. If an officer shows a consistent disparity compared to other officers across many zones, he or she may be using biased criteria when deciding to stop a vehicle. However, it is also possible that non-bias reasons may account for differences.&lt;/p&gt;
 &lt;p&gt;When analyzing the decision to conduct a search during a stop, the underlying population at risk of a search is known since a driver has to have been stopped in order to get searched. The rate of searches is a bit more straight forward than decisions to stop a vehicle, but there are still limitations (Knowles, Persico, and Todd 1999; Rojek, Rosenfeld, and Decker 2012). There may be bias-neutral reasons for a racial disparity in searches. For instance, drivers may have different probabilities of displaying suspicious behavior across race or officers may come in contact with different rates of suspicious activity. However, comparing to other officers provides a reasonable standard for comparison. While officers experiences are unique, there should be some similarities between officers in regard to deciding when to conduct a search.&lt;/p&gt;
 &lt;p&gt;Finally, hit rates show whether different levels of suspicion are being applied to groups (Persico and Todd 2006). Categorical differences, when found, show that a group has a lower or higher threshold used to initiate a search, though some limitations are discussed in the research literature (Simoiu, Corbett-Davies, and Goel 2016). For instance, there may be group differences in the rates of carrying evidence. Applying a hit rate analysis to individuals is also challenging since the population that each officer has searched is usually small and a single instance of finding evidence can alter the hit rate drastically. Take, for example, an officer who conducts five searches. Each instance of finding evidence would change her or his hit rate by 20%. That large swing makes hit rates less reliable when applied to individuals than when applied to a department as a whole. Some modeling strategies can be used to adjust for these limitations, but they are not addressed in this brief report.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;traffic-stops&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Traffic Stops&lt;/h1&gt;
+&lt;p&gt;As discussed above, an analysis of traffic stops must take into account the location of the stop and use a legitimate comparison in order to contextualize and rates. To do this, I calculated the percent of stops made that were black drivers for every officer in every patrol zone. I selected zones where Officer Delke made more than 10 stops and excluded any officer who made less than 10 stops. This produced 1004 Officer-Zone observations. Zones included in the analysis are shown in Figure 1. Figure 2 shows the distribution of officers’ rate of stopping black drivers in each patrol zone. The bluish line represents officer Delke in the distribution.&lt;/p&gt;
+&lt;p&gt;Table 1 shows Officer Delke’s total stops, stops of black drivers, and percent of drivers who were black in each zone. For all officers, the average percentage and the standard deviation of the mean is shown. Finally, officer Delke’s z-scores show the number of standard deviations his rate is from the mean.&lt;/p&gt;
+&lt;p&gt;In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large amount about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.&lt;/p&gt;
 &lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;caption&gt;
 (#tab:table 1)Officer Delke’s Traffic Stops by Zone Compared to All Officers in Zone
@@ -57,7 +63,7 @@ All Officers
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th style=&#34;text-align:left;&#34;&gt;
-Zone
+Zone&lt;sup&gt;a&lt;/sup&gt;
 &lt;/th&gt;
 &lt;th style=&#34;text-align:right;&#34;&gt;
 Total Stops
@@ -75,7 +81,7 @@ Mean Black %
 SD % Black Stops
 &lt;/th&gt;
 &lt;th style=&#34;text-align:right;&#34;&gt;
-Delke Z-Score&lt;sup&gt;a&lt;/sup&gt;
+Delke Z-Score&lt;sup&gt;b&lt;/sup&gt;
 &lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
@@ -314,30 +320,30 @@ Delke Z-Score&lt;sup&gt;a&lt;/sup&gt;
 &lt;tfoot&gt;
 &lt;tr&gt;
 &lt;td style=&#34;padding: 0; border:0;&#34; colspan=&#34;100%&#34;&gt;
-&lt;sup&gt;a&lt;/sup&gt; Number of Standard Deviations From Mean
+&lt;sup&gt;a&lt;/sup&gt; 200 zones are in East Precinct, 400 is Central Precinct, 600 is North Precinct
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;padding: 0; border:0;&#34; colspan=&#34;100%&#34;&gt;
+&lt;sup&gt;b&lt;/sup&gt; Number of Standard Deviations From Mean
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tfoot&gt;
 &lt;/table&gt;
-&lt;/div&gt;
-&lt;div id=&#34;traffic-stops&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Traffic Stops&lt;/h1&gt;
-&lt;p&gt;As discussed above, an analysis of traffic stops must take into account the location of the stop and use a legitimate comparison in order to contextualize and rates. To do this, I calculated the percent of stops made that were black drivers for every officer in every patrol zone. I selected zones where Officer Delke made more than 10 stops and excluded any officer who made less than 10 stops. This produced 1004 Officer-Zone observations. Figure 1 shows the distribution of officers’ rate of stopping black drivers in each patrol zone. The bluish line represents officer Delke in the distribution.&lt;/p&gt;
-&lt;p&gt;Table 1 shows Officer Delke’s total stops, stops of black drivers, and percent of drivers who were black in each zone. For all officers, the average percentage and the standard deviation of the mean is shown. Finally, officer Delke’s z-scores show the number of standard deviations his rate is from the mean.&lt;/p&gt;
-&lt;p&gt;In general, two noticeable findings emerge. First, Officer Delke was above the mean in nine out of 10 zones. Zones highlighted in red show areas where he differed by a large amount about from his peers. Zones with small sample sizes should be interpreted cautiously because percentages can change widely based on a few cases.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%201-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Map-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%202-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;searches&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Searches&lt;/h1&gt;
 &lt;p&gt;While there is likely some geographic variation in the probability that a search will occur (i.e. where a car is pulled over contributes to suspicion or more suspicious people are pulled over in certain areas), it is probably a reasonable assumption that, in general, searches would be conducted based on uniform criteria. If one officer makes more searches than others, she or he is either being unequally exposed to people who meet search criteria or are applying different criteria to initiate a search. Additionally, since searches only occur in a small percentage of stops, breaking them out by zone and officer would not produce interpretable results. This analysis includes all patrol zones in Davidson County&lt;/p&gt;
-&lt;p&gt;The percentage of drivers that is searched is a highly-skewed distribution. Most officers conduct few searches. To limit the sample to those who regularly make traffic stops, I focused on officers who had made more than 100 stops in the two-year time span (N=670 officers). With the high skew, the mean is not reflective of the true central tendency. Instead, the median splits the distribution with half the officers below and half above. The median percentage of drivers who are searched is 2.6%. Half of officers have a lower search rate, half are above. Officer Delke conducted a search at 8.8% of stops. This rate is 3.4 times the median rate. His rate places him at the 88 percentile for searches of all drivers.&lt;/p&gt;
+&lt;p&gt;The percentage of drivers that is searched is a highly-skewed distribution, shown in Figure 3. Most officers conduct few searches. To limit the sample to those who regularly make traffic stops, I focused on officers who had made more than 100 stops in the two-year time span (N=670 officers). With the high skew, the mean is not reflective of the true central tendency. Instead, the median splits the distribution with half the officers below and half above. Figure 4 shows search rates for the median officer and Officer Delke. The median percentage of drivers who are searched is 2.6%. Half of officers have a lower search rate, half are above. Officer Delke conducted a search at 8.8% of stops. This rate is 3.4 times the median rate. His rate places him at the 88 percentile for searches of all drivers.&lt;/p&gt;
 &lt;p&gt;Focusing on black drivers, the median rate of searches for the same sample of officers is 3.8%. Office Delke searched 10.7% of black drivers he searched. His rate places him at the 85.8 percentile for searches of black drivers.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%202-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%203-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/bar%20graph-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;hit-rates&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Hit Rates&lt;/h1&gt;
-&lt;p&gt;Analyzing hit rates becomes challenging because many officer have not conducted enough searches to calculate stable percentages. Hit rates are usually calculated in aggregate. I selected only officers who had made more than 100 stops in the two-year period and had conducted more than five searches of black drivers (N=340 officers). Many officers did not find evidence. The median officer found evidence in 26.1% of searches. For only black drivers, the median was 26.5%. Officer Delke found evidence in 33.3% of searches. Since Officer Delke only conducted three searches of white drivers, his hit-rate does not change when focusing on only black drivers. Officer Delke’s hit rate is within the norm for officers and slightly higher than the average.&lt;/p&gt;
+&lt;p&gt;Analyzing hit rates becomes challenging because many officers have not conducted enough searches to calculate stable percentages. Hit rates are usually calculated in aggregate. I selected only officers who had made more than 100 stops in the two-year period and had conducted more than five searches of black drivers (N=340 officers). Figure 5 shows the hit rate distribution. Many officers did not find evidence. The median officer found evidence in 26.1% of searches. For only black drivers, the median was 26.5%. Officer Delke found evidence in 33.3% of searches. Since Officer Delke only conducted three searches of white drivers, his hit-rate does not change when focusing on only black drivers. Officer Delke’s hit rate is within the norm for officers and slightly higher than the average.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/hit%20rate-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;
