@@ -20,7 +20,7 @@
 
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;/files/Delke_Report.pdf&#34;&gt;Click here to download a pdf copy of this report&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;/files/Delke_Report-FINAL.pdf&#34;&gt;Click here to download a pdf copy of this report&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;All data and code used to generate this report can be found on my &lt;a href=&#34;http://github.com/PeterVielehr/Delke-Report&#34;&gt;Github page&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Officer Delke shot Daniel Hambrick in the back while he was running away on July 26, 2018. He was hired by MNPD on July 1, 2016 and on December 28, 2016 was assigned to the East Precinct. The first traffic stop record for Officer Delke is from March 4, 2017 while assigned to the South Precinct. Following his assignment to East Precinct (from December 28, 2016 to February 24, 2017), Officer Delke spent two months in South Precinct (February 25, 2017 to April 20, 2017) before moving to North Precinct and finishing out 2017. On January 7, 2018, Officer Delke was assigned to East Precinct. Subsequently, Officer Delke was assigned to the Juvenile Crimes Task Force.&lt;/p&gt;
@@ -133,25 +133,25 @@ Delke Z-Score&lt;sup&gt;b&lt;/sup&gt;
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:left;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:left;width: 3em; font-weight: bold;color: red;&#34;&gt;
 223
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:right;width: 3em; font-weight: bold;color: red;&#34;&gt;
 95
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:right;width: 3em; font-weight: bold;color: red;&#34;&gt;
 68
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:right;width: 3em; font-weight: bold;color: red;&#34;&gt;
 71.6
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:right;width: 3em; font-weight: bold;color: red;&#34;&gt;
 59.2
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:right;width: 3em; font-weight: bold;color: red;&#34;&gt;
 12.5
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;width: 3em; &#34;&gt;
+&lt;td style=&#34;text-align:right;width: 3em; font-weight: bold;color: red;&#34;&gt;
 0.99
 &lt;/td&gt;
 &lt;/tr&gt;
@@ -336,8 +336,9 @@ Delke Z-Score&lt;sup&gt;b&lt;/sup&gt;
 &lt;div id=&#34;searches&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Searches&lt;/h1&gt;
 &lt;p&gt;While there is likely some geographic variation in the probability that a search will occur (i.e. where a car is pulled over contributes to suspicion or more suspicious people are pulled over in certain areas), it is probably a reasonable assumption that, in general, searches would be conducted based on uniform criteria. If one officer makes more searches than others, she or he is either being unequally exposed to people who meet search criteria or are applying different criteria to initiate a search. Additionally, since searches only occur in a small percentage of stops, breaking them out by zone and officer would not produce interpretable results. This analysis includes all patrol zones in Davidson County&lt;/p&gt;
-&lt;p&gt;The percentage of drivers that is searched is a highly-skewed distribution, shown in Figure 3. Most officers conduct few searches. To limit the sample to those who regularly make traffic stops, I focused on officers who had made more than 100 stops in the two-year time span (N=670 officers). With the high skew, the mean is not reflective of the true central tendency. Instead, the median splits the distribution with half the officers below and half above. Figure 4 shows search rates for the median officer and Officer Delke. The median percentage of drivers who are searched is 2.6%. Half of officers have a lower search rate, half are above. Officer Delke conducted a search at 8.8% of stops. This rate is 3.4 times the median rate. His rate places him at the 88 percentile for searches of all drivers.&lt;/p&gt;
-&lt;p&gt;Focusing on black drivers, the median rate of searches for the same sample of officers is 3.8%. Office Delke searched 10.7% of black drivers he searched. His rate places him at the 85.8 percentile for searches of black drivers.&lt;/p&gt;
+&lt;p&gt;The percentage of drivers that are searched is a highly-skewed distribution, shown in Figure 3. Most officers conduct few searches. To limit the sample to those who regularly make traffic stops, I focused on officers who had made more than 100 stops in the two-year time span (N=670 officers). With the high skew, the mean is not reflective of the true central tendency. Instead, the median splits the distribution with half the officers below and half above. Figure 4 shows search rates for the median officer and Officer Delke. The median percentage of drivers who are searched is 2.6%. Half of officers have a lower search rate, half are above. Officer Delke conducted a search at 8.8% of stops. This rate is 3.4 times the median rate. His rate places him at the 88 percentile for searches of all drivers.&lt;/p&gt;
+&lt;p&gt;Focusing on black drivers, the median rate of searches for the same sample of officers is 3.8%. Office Delke searched 10.7% of black drivers he stopped. His rate places him at the 85.8 percentile for searches of black drivers.&lt;/p&gt;
+&lt;p&gt;For white drivers, the median rate of searches for the sample of officers is 1.5%. Office Delke searched 2.5% of white drivers he stopped. His rate places him at the 64.9 percentile for searches of black drivers.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/Figure%203-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-02-analysis-of-officer-delke-s-traffic-stops-and-searches_files/figure-html/bar%20graph-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -366,6 +367,15 @@ Delke Z-Score&lt;sup&gt;b&lt;/sup&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Driving While Black Nashville</title>
+      <link>/project/dwb/</link>
+      <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/project/dwb/</guid>
+      <description></description>
     </item>
     
     <item>
