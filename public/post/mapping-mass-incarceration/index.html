@@ -377,10 +377,13 @@ spdf&lt;-do.call(&quot;rbind&quot;, temp.list) #Creates a Spatial Points Data Fr
 <h2>Mapping in Leaflet</h2>
 <p>The first step is to clean the labels from the .kml files. I need to get the facility type on it’s own to sort the facilities. The Description is a string with HTML that is helpful for parsing.</p>
 <pre class="r"><code>df&lt;-as.data.frame(spdf)
-s&lt;-df %&gt;% separate(Description, c(&quot;type&quot;, &quot;geoid&quot;, &quot;county&quot;, &quot;population&quot;), sep = &quot;&lt;/div&gt;&lt;div&gt;&quot;, remove = F,
-         convert = FALSE, extra = &quot;warn&quot;, fill = &quot;warn&quot;)
+
+s&lt;-df %&gt;% separate(Description, c(&quot;type&quot;, &quot;geoid&quot;, &quot;county&quot;, &quot;population&quot;), 
+                   sep = &quot;&lt;/div&gt;&lt;div&gt;&quot;, remove = F, convert = FALSE, 
+                   extra = &quot;warn&quot;, fill = &quot;warn&quot;)
 
 spdf$type&lt;-gsub(&quot;&lt;div&gt;Facility type: &quot;, &quot;&quot;, s$type)
+
 spdf$type&lt;-ifelse(spdf$type==&quot;&quot;, &quot;unknown&quot;, spdf$type)</code></pre>
 <p>Next, I grouped together some facility types and gave them colors.</p>
 <pre class="r"><code>spdf$type.grouped&lt;- sapply(spdf$type, function(x) {
@@ -515,7 +518,7 @@ shinyApp(ui, server)</code></pre>
   <div class="container">
     <p class="powered-by">
 
-      &copy; 2018 &middot; 
+      &copy; 2019 &middot; 
 
       Powered by the
       <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

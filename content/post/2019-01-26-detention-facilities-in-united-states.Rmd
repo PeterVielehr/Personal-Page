@@ -70,13 +70,16 @@ spdf<-do.call("rbind", temp.list) #Creates a Spatial Points Data Frame
 
 The first step is to clean the labels from the .kml files. I need to get the facility type on it's own to sort the facilities. The Description is a string with HTML that is helpful for parsing. 
 
-```{r clean labels, eval=FALSE}
+```{r clean.labels, eval=FALSE}
 
 df<-as.data.frame(spdf)
-s<-df %>% separate(Description, c("type", "geoid", "county", "population"), sep = "</div><div>", remove = F,
-         convert = FALSE, extra = "warn", fill = "warn")
+
+s<-df %>% separate(Description, c("type", "geoid", "county", "population"), 
+                   sep = "</div><div>", remove = F, convert = FALSE, 
+                   extra = "warn", fill = "warn")
 
 spdf$type<-gsub("<div>Facility type: ", "", s$type)
+
 spdf$type<-ifelse(spdf$type=="", "unknown", spdf$type)
 
 ```

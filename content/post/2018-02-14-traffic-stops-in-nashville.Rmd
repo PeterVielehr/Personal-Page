@@ -99,7 +99,9 @@ summary(mod2)
 
 ```{r results='asis'}
 
-stargazer::stargazer(mod, mod2, type = "html", style = "asr")
+stargazer::stargazer(mod, mod2, type = "html", style = "asr", 
+                     dep.var.labels   = "Found Evidence", 
+                     star.cutoffs = c(0.05, 0.01, 0.001))
 
 ```
 
