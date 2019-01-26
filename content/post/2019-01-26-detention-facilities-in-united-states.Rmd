@@ -1,0 +1,186 @@
+---
+title: Mapping Mass Incarceration in the United States with Leaflet for R and Shiny
+author: Peter Vielehr
+date: '2019-01-26'
+slug: mapping-mass-incarceration
+categories: []
+tags:
+  - Crime
+header:
+  caption: 'Photo by Hédi Benyounes on Unsplash'
+  image: 'hedi-benyounes-735849-unsplash.jpg'
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+
+library(tidyverse)
+
+load("~/Box Sync/R/Prison populaiton/FullUSPrisonMap.Rda")
+```
+
+
+## Mass Incarceration in US
+
+The United States has the highest rate of imprisonment in the world. With about 1.3 million people in the United States behind bars, the infrastructure needed to house this population is immense and costly. The Prison Policy Initiative [calculated](https://www.prisonpolicy.org/reports/money.html) that the commonly cited figure of 80 billion dollars per year vastly underestimates the true cost of imprisonment. They argue that accounting for police, criminal courts, corrections, and monetary costs to families totals \$182 billion. 
+
+```{r, echo=FALSE}
+knitr::include_app("http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/")
+```
+
+[View full screen map](http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/)
+
+### Visualizing Mass Incarceration's infrastructure
+
+While understanding the number of people incarcerated and the costs is important, seeing the scale of incarceration is important. Detention facilities operate at the county, state, and federal levels. This app uses data from the The Prison Policy Initiative's [Prisoners of the Census](www.prisonersofthecensus.org) and maps it using Leaflet with Shiny.
+
+#### Shiny Apps/Shiny server
+
+Making a shiny app is a great way to communicate findings. You can embed your apps on websites if you host it on a server. One option for hosting is through [Shinyapps.io](https://www.shinyapps.io/). This is good for many applications but if you think you will have much web traffic you will need a different hosting server. I use the free tier of Amazon AWS EC2. If I ever need extra computing, I can scale up if needed. I found [several](https://tm3.ghost.io/2017/12/31/deploying-an-r-shiny-app-to-aws/) [good](https://towardsdatascience.com/how-to-host-a-r-shiny-app-on-aws-cloud-in-7-simple-steps-5595e7885722) [tutorials](https://aws.amazon.com/blogs/big-data/running-r-on-aws/) on setting up a Shiny Server. While it can take a bit of work, once you figure it out it is pretty easy.
+
+## Data
+
+The Prison Policy Initiative used data from the 2010 US Census group quarters data to produce state-level .kml files that contain every detention facility counted in the 2010 Census. These files can be used in Google GIS and other GIS software. In R .kml files can be used to create spatial data frames.
+
+The first step is to download the .kml files, load them into R, and create a Spatial Points Data Frame.
+
+```{r load data, eval=FALSE}
+
+states<-state.abb
+
+urls<-paste("http://www.prisonersofthecensus.org/locator2010/kml/state_pts_", state.abb, ".kml", sep = "" )
+destfiles<-paste("/Users/petervielehr/Box Sync/R/Prison populaiton/", state.abb, "_pts.kml", sep = "")
+
+for(i in seq_along(urls)){
+  download.file(urls[i], destfiles[i], mode="w")
+} 
+
+##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &
+
+temp <- list.files(pattern="*.kml")
+temp.list<-list()
+for(i in seq_along(temp)){
+  temp.list[i]<- readOGR(temp[i])
+}
+
+spdf<-do.call("rbind", temp.list)
+
+```
+
+## Mapping in Leaflet
+
+The first step is to clean the labels from the .kml files. I need to get the facility type on it's own to sort the facilities. The Description is a string with HTML that is helpful for parsing. 
+
+```{r clean labels}
+
+df<-as.data.frame(spdf)
+s<-df %>% separate(Description, c("type", "geoid", "county", "population"), sep = "</div><div>", remove = F,
+         convert = FALSE, extra = "warn", fill = "warn")
+
+spdf$type<-gsub("<div>Facility type: ", "", s$type)
+spdf$type<-ifelse(spdf$type=="", "unknown", spdf$type)
+
+```
+
+Next, I grouped together some facility types and gave them colors.
+
+``` {r}
+
+spdf$type.grouped<- sapply(spdf$type, function(x) {
+  if(x=="Local" | x=="Local,Federal" | x=="Local,Private"){
+    "Local" 
+  } else if(x=="State" | x=="State,Federal" | x=="State,Local" | x=="State,Private") {
+    "State"
+  } else if(x=="Private"){
+    "Private"
+  } else if(x=="Military"){
+    "Military"
+  } else if(x=="Federal") {
+    "Federal"
+  } else if(x=="Halfway House"){
+    "Halfway House"
+  } else {
+    "Other/Unknown"
+  }
+})
+
+spdf$color<- sapply(spdf$type, function(x) {
+  if(x == "Local") {
+    "purple"
+  } else if(x == "State") {
+    "saddlebrown"
+  } else if(x == "Private") {
+    "blue"
+  } else if(x == "Military") {
+    "olivedrab"
+  } else if (x== "Federal") {
+    "red"
+  } else if (x=="Halfway House") {
+    "cyan"
+  } else {
+    "green"
+  } })
+
+# Save data here if you are moving to a shiny server
+```
+
+###Create Shiny App
+
+The following code should be in your shiny app and moved to your project folder--ex. `/srv/shiny-server/ShinyApps/PrisonsMap`--folder along with your data.
+
+I adapted this code from: [https://rstudio.github.io/leaflet/shiny.html](https://rstudio.github.io/leaflet/shiny.html)
+
+```{r, eval=FALSE}
+library(shiny)
+library(leaflet)
+
+load("/srv/shiny-server/ShinyApps/PrisonsMap/FullUSPrisonMap.Rda") #Load Data
+
+ui <- bootstrapPage(
+  tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
+  leafletOutput("map", width = "100%", height = "100%"),
+  absolutePanel(top = 10, right = 10,
+                selectInput("type", "Facility Type", choices =  unique(spdf$type.grouped))
+  )
+)
+
+
+server <- function(input, output, session) {
+  
+  # Reactive expression for the data subsetted to what the user selected
+  
+  filteredData <- reactive({
+    spdf[spdf$type.grouped == input$type,]
+  })
+
+  output$map <- renderLeaflet({
+    # Use leaflet() here, and only include aspects of the map that
+    # won't need to change dynamically (at least, not unless the
+    # entire map is being torn down and recreated).
+    leaflet(spdf)%>% 
+      setView(lng = mean(spdf@coords[,1]), lat = mean(spdf@coords[,2]), zoom = 3)%>% 
+      addTiles()
+  })
+  
+  # Incremental changes to the map should be performed in
+  # an observer. Each independent set of things that can change
+  # should be managed in its own observer.
+  observe({
+    
+    leafletProxy("map", data = filteredData()) %>%
+      clearMarkerClusters() %>%
+      clearMarkers() %>%
+      addCircleMarkers(lng = filteredData()@coords[,1], lat = filteredData()@coords[,2], 
+                 popup = paste(filteredData()$Description),
+                 #clusterOptions = markerClusterOptions(),
+                 radius = 5, color = filteredData()$color, fillOpacity = .9
+      )
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+

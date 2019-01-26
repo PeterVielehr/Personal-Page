@@ -11,6 +11,153 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Mapping Mass Incarceration in the United States with Leaflet for R and Shiny</title>
+      <link>/post/mapping-mass-incarceration/</link>
+      <pubDate>Sat, 26 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mapping-mass-incarceration/</guid>
+      <description>&lt;div id=&#34;mass-incarceration-in-us&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mass Incarceration in US&lt;/h2&gt;
+&lt;p&gt;The United States has the highest rate of imprisonment in the world. With about 1.3 million people in the United States behind bars, the infrastructure needed to house this population is immense and costly. The Prison Policy Initiative &lt;a href=&#34;https://www.prisonpolicy.org/reports/money.html&#34;&gt;calculated&lt;/a&gt; that the commonly cited figure of 80 billion dollars per year vastly underestimates the true cost of imprisonment. They argue that accounting for police, criminal courts, corrections, and monetary costs to families totals $182 billion.&lt;/p&gt;
+&lt;iframe src=&#34;http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/?showcase=0&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;&lt;a href=&#34;http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/&#34;&gt;View full screen map&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;visualizing-mass-incarcerations-infrastructure&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Visualizing Mass Incarceration’s infrastructure&lt;/h3&gt;
+&lt;p&gt;While understanding the number of people incarcerated and the costs is important, seeing the scale of incarceration is important. Detention facilities operate at the county, state, and federal levels. This app uses data from the The Prison Policy Initiative’s &lt;a href=&#34;www.prisonersofthecensus.org&#34;&gt;Prisoners of the Census&lt;/a&gt; and maps it using Leaflet with Shiny.&lt;/p&gt;
+&lt;div id=&#34;shiny-appsshiny-server&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Shiny Apps/Shiny server&lt;/h4&gt;
+&lt;p&gt;Making a shiny app is a great way to communicate findings. You can embed your apps on websites if you host it on a server. One option for hosting is through &lt;a href=&#34;https://www.shinyapps.io/&#34;&gt;Shinyapps.io&lt;/a&gt;. This is good for many applications but if you think you will have much web traffic you will need a different hosting server. I use the free tier of Amazon AWS EC2. If I ever need extra computing, I can scale up if needed. I found &lt;a href=&#34;https://tm3.ghost.io/2017/12/31/deploying-an-r-shiny-app-to-aws/&#34;&gt;several&lt;/a&gt; &lt;a href=&#34;https://towardsdatascience.com/how-to-host-a-r-shiny-app-on-aws-cloud-in-7-simple-steps-5595e7885722&#34;&gt;good&lt;/a&gt; &lt;a href=&#34;https://aws.amazon.com/blogs/big-data/running-r-on-aws/&#34;&gt;tutorials&lt;/a&gt; on setting up a Shiny Server. While it can take a bit of work, once you figure it out it is pretty easy.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;The Prison Policy Initiative used data from the 2010 US Census group quarters data to produce state-level .kml files that contain every detention facility counted in the 2010 Census. These files can be used in Google GIS and other GIS software. In R .kml files can be used to create spatial data frames.&lt;/p&gt;
+&lt;p&gt;The first step is to download the .kml files, load them into R, and create a Spatial Points Data Frame.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;states&amp;lt;-state.abb
+
+urls&amp;lt;-paste(&amp;quot;http://www.prisonersofthecensus.org/locator2010/kml/state_pts_&amp;quot;, state.abb, &amp;quot;.kml&amp;quot;, sep = &amp;quot;&amp;quot; )
+destfiles&amp;lt;-paste(&amp;quot;/Users/petervielehr/Box Sync/R/Prison populaiton/&amp;quot;, state.abb, &amp;quot;_pts.kml&amp;quot;, sep = &amp;quot;&amp;quot;)
+
+for(i in seq_along(urls)){
+  download.file(urls[i], destfiles[i], mode=&amp;quot;w&amp;quot;)
+} 
+
+##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &amp;amp;
+
+temp &amp;lt;- list.files(pattern=&amp;quot;*.kml&amp;quot;)
+temp.list&amp;lt;-list()
+for(i in seq_along(temp)){
+  temp.list[i]&amp;lt;- readOGR(temp[i])
+}
+
+spdf&amp;lt;-do.call(&amp;quot;rbind&amp;quot;, temp.list)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mapping-in-leaflet&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mapping in Leaflet&lt;/h2&gt;
+&lt;p&gt;The first step is to clean the labels from the .kml files. I need to get the facility type on it’s own to sort the facilities. The Description is a string with HTML that is helpful for parsing.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df&amp;lt;-as.data.frame(spdf)
+s&amp;lt;-df %&amp;gt;% separate(Description, c(&amp;quot;type&amp;quot;, &amp;quot;geoid&amp;quot;, &amp;quot;county&amp;quot;, &amp;quot;population&amp;quot;), sep = &amp;quot;&amp;lt;/div&amp;gt;&amp;lt;div&amp;gt;&amp;quot;, remove = F,
+         convert = FALSE, extra = &amp;quot;warn&amp;quot;, fill = &amp;quot;warn&amp;quot;)
+
+spdf$type&amp;lt;-gsub(&amp;quot;&amp;lt;div&amp;gt;Facility type: &amp;quot;, &amp;quot;&amp;quot;, s$type)
+spdf$type&amp;lt;-ifelse(spdf$type==&amp;quot;&amp;quot;, &amp;quot;unknown&amp;quot;, spdf$type)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, I grouped together some facility types and gave them colors.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;spdf$type.grouped&amp;lt;- sapply(spdf$type, function(x) {
+  if(x==&amp;quot;Local&amp;quot; | x==&amp;quot;Local,Federal&amp;quot; | x==&amp;quot;Local,Private&amp;quot;){
+    &amp;quot;Local&amp;quot; 
+  } else if(x==&amp;quot;State&amp;quot; | x==&amp;quot;State,Federal&amp;quot; | x==&amp;quot;State,Local&amp;quot; | x==&amp;quot;State,Private&amp;quot;) {
+    &amp;quot;State&amp;quot;
+  } else if(x==&amp;quot;Private&amp;quot;){
+    &amp;quot;Private&amp;quot;
+  } else if(x==&amp;quot;Military&amp;quot;){
+    &amp;quot;Military&amp;quot;
+  } else if(x==&amp;quot;Federal&amp;quot;) {
+    &amp;quot;Federal&amp;quot;
+  } else if(x==&amp;quot;Halfway House&amp;quot;){
+    &amp;quot;Halfway House&amp;quot;
+  } else {
+    &amp;quot;Other/Unknown&amp;quot;
+  }
+})
+
+spdf$color&amp;lt;- sapply(spdf$type, function(x) {
+  if(x == &amp;quot;Local&amp;quot;) {
+    &amp;quot;purple&amp;quot;
+  } else if(x == &amp;quot;State&amp;quot;) {
+    &amp;quot;saddlebrown&amp;quot;
+  } else if(x == &amp;quot;Private&amp;quot;) {
+    &amp;quot;blue&amp;quot;
+  } else if(x == &amp;quot;Military&amp;quot;) {
+    &amp;quot;olivedrab&amp;quot;
+  } else if (x== &amp;quot;Federal&amp;quot;) {
+    &amp;quot;red&amp;quot;
+  } else if (x==&amp;quot;Halfway House&amp;quot;) {
+    &amp;quot;cyan&amp;quot;
+  } else {
+    &amp;quot;green&amp;quot;
+  } })
+
+# Save data here if you are moving to a shiny server&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;create-shiny-app&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Create Shiny App&lt;/h3&gt;
+&lt;p&gt;The following code should be in your shiny app and moved to your project folder–ex. &lt;code&gt;/srv/shiny-server/ShinyApps/PrisonsMap&lt;/code&gt;–folder along with your data.&lt;/p&gt;
+&lt;p&gt;I adapted this code from: &lt;a href=&#34;https://rstudio.github.io/leaflet/shiny.html&#34; class=&#34;uri&#34;&gt;https://rstudio.github.io/leaflet/shiny.html&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(shiny)
+library(leaflet)
+
+load(&amp;quot;/srv/shiny-server/ShinyApps/PrisonsMap/FullUSPrisonMap.Rda&amp;quot;) #Load Data
+
+ui &amp;lt;- bootstrapPage(
+  tags$style(type = &amp;quot;text/css&amp;quot;, &amp;quot;html, body {width:100%;height:100%}&amp;quot;),
+  leafletOutput(&amp;quot;map&amp;quot;, width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;),
+  absolutePanel(top = 10, right = 10,
+                selectInput(&amp;quot;type&amp;quot;, &amp;quot;Facility Type&amp;quot;, choices =  unique(spdf$type.grouped))
+  )
+)
+
+
+server &amp;lt;- function(input, output, session) {
+  
+  # Reactive expression for the data subsetted to what the user selected
+  
+  filteredData &amp;lt;- reactive({
+    spdf[spdf$type.grouped == input$type,]
+  })
+
+  output$map &amp;lt;- renderLeaflet({
+    # Use leaflet() here, and only include aspects of the map that
+    # won&amp;#39;t need to change dynamically (at least, not unless the
+    # entire map is being torn down and recreated).
+    leaflet(spdf)%&amp;gt;% 
+      setView(lng = mean(spdf@coords[,1]), lat = mean(spdf@coords[,2]), zoom = 3)%&amp;gt;% 
+      addTiles()
+  })
+  
+  # Incremental changes to the map should be performed in
+  # an observer. Each independent set of things that can change
+  # should be managed in its own observer.
+  observe({
+    
+    leafletProxy(&amp;quot;map&amp;quot;, data = filteredData()) %&amp;gt;%
+      clearMarkerClusters() %&amp;gt;%
+      clearMarkers() %&amp;gt;%
+      addCircleMarkers(lng = filteredData()@coords[,1], lat = filteredData()@coords[,2], 
+                 popup = paste(filteredData()$Description),
+                 #clusterOptions = markerClusterOptions(),
+                 radius = 5, color = filteredData()$color, fillOpacity = .9
+      )
+  })
+}
+
+shinyApp(ui, server)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Analysis of Officer Delke’s Traffic Stops and Searches</title>
       <link>/post/analysis-of-officer-delke-s-traffic-stops-and-searches/</link>
       <pubDate>Tue, 02 Oct 2018 00:00:00 +0000</pubDate>
