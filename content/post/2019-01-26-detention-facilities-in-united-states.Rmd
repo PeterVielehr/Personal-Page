@@ -17,7 +17,6 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 
 library(tidyverse)
 
-load("~/Box Sync/R/Prison populaiton/FullUSPrisonMap.Rda")
 ```
 
 
@@ -48,16 +47,14 @@ The first step is to download the .kml files, load them into R, and create a Spa
 
 ```{r load data, eval=FALSE}
 
-states<-state.abb
-
 urls<-paste("http://www.prisonersofthecensus.org/locator2010/kml/state_pts_", state.abb, ".kml", sep = "" )
-destfiles<-paste("/Users/petervielehr/Box Sync/R/Prison populaiton/", state.abb, "_pts.kml", sep = "")
+destfiles<-paste0("/filepath", state.abb, "_pts.kml")
 
 for(i in seq_along(urls)){
   download.file(urls[i], destfiles[i], mode="w")
 } 
 
-##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &
+##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the "&". 
 
 temp <- list.files(pattern="*.kml")
 temp.list<-list()
@@ -65,7 +62,7 @@ for(i in seq_along(temp)){
   temp.list[i]<- readOGR(temp[i])
 }
 
-spdf<-do.call("rbind", temp.list)
+spdf<-do.call("rbind", temp.list) #Creates a Spatial Points Data Frame
 
 ```
 
@@ -73,7 +70,7 @@ spdf<-do.call("rbind", temp.list)
 
 The first step is to clean the labels from the .kml files. I need to get the facility type on it's own to sort the facilities. The Description is a string with HTML that is helpful for parsing. 
 
-```{r clean labels}
+```{r clean labels, eval=FALSE}
 
 df<-as.data.frame(spdf)
 s<-df %>% separate(Description, c("type", "geoid", "county", "population"), sep = "</div><div>", remove = F,
@@ -86,7 +83,7 @@ spdf$type<-ifelse(spdf$type=="", "unknown", spdf$type)
 
 Next, I grouped together some facility types and gave them colors.
 
-``` {r}
+``` {r, eval=FALSE}
 
 spdf$type.grouped<- sapply(spdf$type, function(x) {
   if(x=="Local" | x=="Local,Federal" | x=="Local,Private"){

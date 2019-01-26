@@ -35,16 +35,14 @@
 &lt;h2&gt;Data&lt;/h2&gt;
 &lt;p&gt;The Prison Policy Initiative used data from the 2010 US Census group quarters data to produce state-level .kml files that contain every detention facility counted in the 2010 Census. These files can be used in Google GIS and other GIS software. In R .kml files can be used to create spatial data frames.&lt;/p&gt;
 &lt;p&gt;The first step is to download the .kml files, load them into R, and create a Spatial Points Data Frame.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;states&amp;lt;-state.abb
-
-urls&amp;lt;-paste(&amp;quot;http://www.prisonersofthecensus.org/locator2010/kml/state_pts_&amp;quot;, state.abb, &amp;quot;.kml&amp;quot;, sep = &amp;quot;&amp;quot; )
-destfiles&amp;lt;-paste(&amp;quot;/Users/petervielehr/Box Sync/R/Prison populaiton/&amp;quot;, state.abb, &amp;quot;_pts.kml&amp;quot;, sep = &amp;quot;&amp;quot;)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;urls&amp;lt;-paste(&amp;quot;http://www.prisonersofthecensus.org/locator2010/kml/state_pts_&amp;quot;, state.abb, &amp;quot;.kml&amp;quot;, sep = &amp;quot;&amp;quot; )
+destfiles&amp;lt;-paste0(&amp;quot;/filepath&amp;quot;, state.abb, &amp;quot;_pts.kml&amp;quot;)
 
 for(i in seq_along(urls)){
   download.file(urls[i], destfiles[i], mode=&amp;quot;w&amp;quot;)
 } 
 
-##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &amp;amp;
+##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &amp;quot;&amp;amp;&amp;quot;. 
 
 temp &amp;lt;- list.files(pattern=&amp;quot;*.kml&amp;quot;)
 temp.list&amp;lt;-list()
@@ -52,7 +50,7 @@ for(i in seq_along(temp)){
   temp.list[i]&amp;lt;- readOGR(temp[i])
 }
 
-spdf&amp;lt;-do.call(&amp;quot;rbind&amp;quot;, temp.list)&lt;/code&gt;&lt;/pre&gt;
+spdf&amp;lt;-do.call(&amp;quot;rbind&amp;quot;, temp.list) #Creates a Spatial Points Data Frame&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;mapping-in-leaflet&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Mapping in Leaflet&lt;/h2&gt;

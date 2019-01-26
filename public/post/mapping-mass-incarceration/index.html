@@ -356,16 +356,14 @@
 <h2>Data</h2>
 <p>The Prison Policy Initiative used data from the 2010 US Census group quarters data to produce state-level .kml files that contain every detention facility counted in the 2010 Census. These files can be used in Google GIS and other GIS software. In R .kml files can be used to create spatial data frames.</p>
 <p>The first step is to download the .kml files, load them into R, and create a Spatial Points Data Frame.</p>
-<pre class="r"><code>states&lt;-state.abb
-
-urls&lt;-paste(&quot;http://www.prisonersofthecensus.org/locator2010/kml/state_pts_&quot;, state.abb, &quot;.kml&quot;, sep = &quot;&quot; )
-destfiles&lt;-paste(&quot;/Users/petervielehr/Box Sync/R/Prison populaiton/&quot;, state.abb, &quot;_pts.kml&quot;, sep = &quot;&quot;)
+<pre class="r"><code>urls&lt;-paste(&quot;http://www.prisonersofthecensus.org/locator2010/kml/state_pts_&quot;, state.abb, &quot;.kml&quot;, sep = &quot;&quot; )
+destfiles&lt;-paste0(&quot;/filepath&quot;, state.abb, &quot;_pts.kml&quot;)
 
 for(i in seq_along(urls)){
   download.file(urls[i], destfiles[i], mode=&quot;w&quot;)
 } 
 
-##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &amp;
+##Florida has an error!!! You have to manually change the name of the facility on line 45, remove the &quot;&amp;&quot;. 
 
 temp &lt;- list.files(pattern=&quot;*.kml&quot;)
 temp.list&lt;-list()
@@ -373,7 +371,7 @@ for(i in seq_along(temp)){
   temp.list[i]&lt;- readOGR(temp[i])
 }
 
-spdf&lt;-do.call(&quot;rbind&quot;, temp.list)</code></pre>
+spdf&lt;-do.call(&quot;rbind&quot;, temp.list) #Creates a Spatial Points Data Frame</code></pre>
 </div>
 <div id="mapping-in-leaflet" class="section level2">
 <h2>Mapping in Leaflet</h2>
