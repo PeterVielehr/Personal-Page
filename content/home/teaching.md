@@ -20,7 +20,7 @@ weight = 60
 Turney Center Industrial Complex is a medium security state prison in middle Tennessee.
 
 Fall 2018
-: SOCI 1020: Social Problems
+: [SOCI 1020: Social Problems](/files/SOC 1020-NSCC-Syllabus-Fall 2018.pdf)
 
 Summer 2018
 : [SOCI 1010: Introduction to Sociology](/files/SOCI 1010-Syllabus-5-31-18.pdf)
@@ -29,6 +29,9 @@ Summer 2018
 
 **Instructor:**
 
+Fall 2018
+: [SOC 1020: Contemporary Social Issues, Special topic: Gender and Society](/files/SOC 1020-Syallabus-8-27-18-Fall 2018.pdf)
+
 Summer 2016 & Fall 2016
 : SOC 1020: Contemporary Social Issues
 
@@ -36,6 +39,9 @@ Summer 2016 & Fall 2016
 [Fall 2016 Syllabus](/files/SOC 1020_Fall 2016.pdf)
 
 **Teaching Assistant:**
+
+Spring 2017 & 2018
+: SOC 4981b: Honors Seminar
 
 Fall 2017
 : SOC 3621: Criminology
