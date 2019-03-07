@@ -340,9 +340,10 @@
       <div id="mass-incarceration-in-us" class="section level2">
 <h2>Mass Incarceration in US</h2>
 <p>The United States has the highest rate of imprisonment in the world. With about 1.3 million people in the United States behind bars, the infrastructure needed to house this population is immense and costly. The Prison Policy Initiative <a href="https://www.prisonpolicy.org/reports/money.html">calculated</a> that the commonly cited figure of 80 billion dollars per year vastly underestimates the true cost of imprisonment. They argue that accounting for police, criminal courts, corrections, and monetary costs to families totals $182 billion.</p>
-<iframe src="http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/?showcase=0" width="672" height="400px">
+<iframe src="http://99.138.129.246:3838/PrisonsMap/?showcase=0" width="672" height="400px">
 </iframe>
-<p><a href="http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/">View full screen map</a></p>
+<p><a href="http://99.138.129.246:3838/PrisonsMap/">View full screen map</a></p>
+<p><em>Update: I switched my server setup from AWS to an old desktop that I had lying around. The embedded app was being blocked as unsecure. If the app does not start automatically, click the link to the full screen version.</em></p>
 <div id="visualizing-mass-incarcerations-infrastructure" class="section level3">
 <h3>Visualizing Mass Incarceration’s infrastructure</h3>
 <p>While understanding the number of people incarcerated and the costs is important, seeing the scale of incarceration is important. Detention facilities operate at the county, state, and federal levels. This app uses data from the The Prison Policy Initiative’s <a href="www.prisonersofthecensus.org">Prisoners of the Census</a> and maps it using Leaflet with Shiny.</p>
@@ -422,10 +423,9 @@ spdf$color&lt;- sapply(spdf$type, function(x) {
   } })
 
 # Save data here if you are moving to a shiny server</code></pre>
-<div id="create-shiny-app" class="section level3">
-<h3>Create Shiny App</h3>
+<p>###Create Shiny App</p>
 <p>The following code should be in your shiny app and moved to your project folder–ex. <code>/srv/shiny-server/ShinyApps/PrisonsMap</code>–folder along with your data.</p>
-<p>I adapted this code from: <a href="https://rstudio.github.io/leaflet/shiny.html" class="uri">https://rstudio.github.io/leaflet/shiny.html</a></p>
+<p>I adapted this code from: <a href="https://rstudio.github.io/leaflet/shiny.html">https://rstudio.github.io/leaflet/shiny.html</a></p>
 <pre class="r"><code>library(shiny)
 library(leaflet)
 
@@ -474,7 +474,6 @@ server &lt;- function(input, output, session) {
 }
 
 shinyApp(ui, server)</code></pre>
-</div>
 </div>
 
     </div>
