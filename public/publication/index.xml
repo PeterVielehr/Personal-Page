@@ -13,12 +13,21 @@
     
     
     <item>
+      <title>Driving While Black: a report on racial profiling in metro nashville police department traffic stops</title>
+      <link>/publication/driving-while-black/</link>
+      <pubDate>Tue, 25 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/driving-while-black/</guid>
+      <description>Data analyst for quantitative findings and coauthor of report.</description>
+    </item>
+    
+    <item>
       <title>Psychiatric Medication, African Americans and the Paradox of Mistrust</title>
       <link>/publication/paradox-mistrust/</link>
       <pubDate>Sun, 06 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>/publication/paradox-mistrust/</guid>
-      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+      <description></description>
     </item>
     
     <item>
@@ -27,7 +36,7 @@
       <pubDate>Sat, 04 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>/publication/health-trust/</guid>
-      <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>
+      <description></description>
     </item>
     
   </channel>
