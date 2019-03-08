@@ -28,9 +28,9 @@ The United States has the highest rate of imprisonment in the world. With about 
 knitr::include_app("http://99.138.129.246:3838/PrisonsMap/")
 ```
 
-[View full screen map](http://99.138.129.246:3838/PrisonsMap/)
+[View full screen map](http://ec2-13-59-135-100.us-east-2.compute.amazonaws.com:3838/PrisonsMap/)
 
-*Update: I switched my server setup from AWS to an old desktop that I had lying around. The embedded app was being blocked as unsecure. If the app does not start automatically, click the link to the full screen version.*
+*Update:* The embedded app might be blocked as unsecure. If the app does not start automatically, click the link to the full screen version
 
 ### Visualizing Mass Incarceration's infrastructure
 
