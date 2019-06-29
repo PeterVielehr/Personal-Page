@@ -187,12 +187,7 @@ summary(weightlm)</code></pre>
            colors = kittens.coded$color)</code></pre>
 <p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>Blue looks to be really small in the last graph, but it does not take time into account.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
-<img src="Blue_face.JPG" alt="Blue is Extra Sweet" width="60%" height="60%" />
-<p class="caption">
-Figure 1: Blue is Extra Sweet
-</p>
-</div>
+<p><img src="../../img/Blue_face.JPG" width="60%" height="50%" style="display: block; margin: auto;" /></p>
 <p>To examine trajectory differences, create an interaction term between day and Cat.</p>
 <p>The resulting plot shows the average trajectories of each cat.</p>
 <pre class="r"><code>weightlm.int&lt;-lm(Weight ~ day.num + Pre_post.eating +  Cat*day.num, kittens.coded)

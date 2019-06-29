@@ -155,8 +155,9 @@ plot_model(weightlm, type = "pred", terms = c( "Cat"),
 
 Blue looks to be really small in the last graph, but it does not take time into account. 
 
-```{r, echo=FALSE,out.width="60%", out.height="60%",fig.cap="Blue is Extra Sweet",fig.show='hold',fig.align='center'}
-knitr::include_graphics(c("Blue_face.JPG"))
+```{r, echo=FALSE,out.width="60%", out.height="50%", fig.show='hold',fig.align='center'}
+
+knitr::include_graphics(c("../../img/Blue_face.JPG"))
 ```
 
 To examine trajectory differences, create an interaction term between day and Cat. 
