@@ -24,14 +24,9 @@ suppressPackageStartupMessages(library(sjPlot))
 
 ```
 
+![](../../img/box_cats1.JPG)
+
 My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found **FIVE** kittens, most of them were totally submerged in rising water. 
-
-```{r, echo=FALSE, out.width="45%", fig.show='hold', fig.align='center'}
-
-knitr::include_graphics(c("../../img/box_cats1.JPG","../../img/box_cats2.JPG"))
-
-```
-
 
 When we got the kittens home, I did the best thing I knew how to do: start collecting data on their growth. 
 
@@ -111,6 +106,7 @@ kittens.sep<-kittens.coded %>%
 
 kittens.sep
 ```
+
 ## Animating Plots
 
 I wanted to play around a bit more with the gganimate package so I made gifs of the growth charts. 

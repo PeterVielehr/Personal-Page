@@ -343,8 +343,8 @@ When we got the kittens home, I did the best thing I knew how to do: start colle
 
 
     <div class="article-style" itemprop="articleBody">
-      <p>My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found <strong>FIVE</strong> kittens, most of them were totally submerged in rising water.</p>
-<p><img src="../../img/box_cats1.JPG" width="45%" style="display: block; margin: auto;" /><img src="../../img/box_cats2.JPG" width="45%" style="display: block; margin: auto;" /></p>
+      <p><img src="../../img/box_cats1.JPG" /></p>
+<p>My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found <strong>FIVE</strong> kittens, most of them were totally submerged in rising water.</p>
 <p>When we got the kittens home, I did the best thing I knew how to do: start collecting data on their growth.</p>
 <p>We color coded their tail tips with the nail polish we had on hand which led to their color names.</p>
 <p>I made a quick Excel workbook to collect the date, weight in grams, and comments for each cat. A few days later, I forgot to weigh before dinner so I weighed after eating. I realized that it would be a good way to track their food consumption. I’m glad I took the two measures. The kittens got a little older and very wiggly before meals. The measurement error would have another measurement to track average growth.</p>
@@ -492,8 +492,10 @@ kittentraj</code></pre>
   labs(color = &quot;Weight Taken&quot;) 
 
 kittens.sep</code></pre>
-<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/individual-1.png" width="672" />
-## Animating Plots</p>
+<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/individual-1.png" width="672" /></p>
+</div>
+<div id="animating-plots" class="section level2">
+<h2>Animating Plots</h2>
 <p>I wanted to play around a bit more with the gganimate package so I made gifs of the growth charts.</p>
 <pre class="r"><code>kittentraj + 
   geom_point(aes(group = seq_along(Date))) +
@@ -537,12 +539,12 @@ summary(weightlm)</code></pre>
 <p><strong>The Kittens grow 16.5g per day on average!!</strong></p>
 <p>A few plots can be made to show the predicted weight of a cat over time and differences in the average weight of the cats.</p>
 <pre class="r"><code>plot_model(weightlm, type = &quot;pred&quot;, terms = c(&quot;day.num&quot;))</code></pre>
-<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>plot_model(weightlm, type = &quot;pred&quot;, terms = c( &quot;Cat&quot;),
            colors = kittens.coded$color)</code></pre>
-<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 <p>Blue looks to be really small in the last graph, but it does not take time into account.</p>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
 <img src="Blue_face.JPG" alt="Blue is Extra Sweet" width="60%" height="60%" />
 <p class="caption">
 Figure 1: Blue is Extra Sweet
@@ -583,7 +585,7 @@ summary(weightlm.int)</code></pre>
 ## F-statistic: 819.5 on 10 and 154 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>plot_model(weightlm.int, type = &quot;pred&quot;, terms = c(&quot;day.num&quot;, &quot;Cat&quot;),
            colors = kittens.coded$color)</code></pre>
-<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>They grow up so fast!</p>
 </div>
 </div>
