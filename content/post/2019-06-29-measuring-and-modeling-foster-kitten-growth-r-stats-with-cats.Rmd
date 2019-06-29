@@ -1,0 +1,181 @@
+---
+title: 'Measuring and Modeling Foster Kitten Growth: R Stats with Cats'
+author: Peter Vielehr
+date: '2019-06-29'
+slug: measuring-and-modeling-foster-kitten-growth-r-stats-with-cats
+categories: 
+  - cats
+tags: []
+header:
+  caption: ''
+  image: ''
+  preview: yes
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(knitr)
+suppressPackageStartupMessages(library(tidyverse))
+library(gganimate)
+suppressPackageStartupMessages(library(sjPlot))
+
+```
+
+My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found **FIVE** kittens, most of them were totally submerged in rising water. 
+
+```{r, echo=FALSE, out.width="45%", fig.show='hold', fig.align='center'}
+
+knitr::include_graphics(c("../../img/box_cats1.JPG","../../img/box_cats2.JPG"))
+
+```
+
+
+When we got the kittens home, I did the best thing I knew how to do: start collecting data on their growth. 
+
+We color coded their tail tips with the nail polish we had on hand which led to their color names. 
+
+I made a quick Excel workbook to collect the date, weight in grams, and comments for each cat. A few days later, I forgot to weigh before dinner so I weighed after eating. I realized that it would be a good way to track their food consumption. I'm glad I took the two measures. The kittens got a little older and very wiggly before meals. The measurement error would have another measurement to track average growth.
+
+### The First Week of Fostering
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RtLfeEjcSZs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### The Second Week of Fostering
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0pHfWmp1_sY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Now Plot Their Progress
+
+Load some packages and data. I was looking for a way to use purrr and Forcats but I didn't need then in such a simple case.
+
+```{r }
+
+library(knitr)
+library(tidyverse)
+library(gganimate)
+library(sjPlot)
+
+load("Kittens.Rda")
+
+kable(kittens[1:10,])
+```
+
+## Plotting Kitten Growth
+
+The raw data need a bit of recoding. I do several things in the next block:
+
+1. Make a color variable to use in the plots.
+2. Re-code the "weight.taken" variable so that it will be correct in the plots.
+    + Order the weight.taken variable levels so that the before eating comes first.
+3. Make a sex variable based on the cat's sex.
+4. Make a numeric date variable that will be used in the regression. Zero is the first day. 
+
+```{r recode variables}
+kittens.coded<-kittens %>%
+  mutate(color=ifelse(Cat=="No Tip", "black", 
+                      ifelse(Cat=="Lavender", "violet", tolower(Cat))),
+         weight.taken=case_when(Pre_post.eating=="Pre-eating" ~ "Before Eating",
+                                Pre_post.eating=="Post-eating" ~ "After Eating"),
+         weight.taken=factor(weight.taken, levels = c("Before Eating", "After Eating")),
+         sex=case_when(Cat=="Blue" | Cat== "Maroon" ~ "Female",
+                       Cat=="Green" | Cat=="Lavender" | Cat=="No Tip" ~ "Male"),
+         day.num=as.numeric(Date)-18055)
+```
+
+Now to plot with ggplot2
+
+```{r trajectories, echo=T}
+kittentraj<-kittens.coded %>%
+  ggplot(aes(Date, Weight, color=Cat)) +
+  geom_line() +
+  scale_color_manual(values = kittens.coded$color)+
+  facet_grid(~ weight.taken) + 
+  ggtitle("Foster Kitten Weight (Grams)") 
+
+kittentraj
+
+```
+
+It is also helpful to split the plots by each kitten so that we can see their weight pre- and post-eating easier.
+
+```{r individual}
+kittens.sep<-kittens.coded %>%
+  ggplot(aes(Date, Weight, color=weight.taken)) +
+  geom_line() +
+  facet_wrap(~ Cat) + 
+  ggtitle("Foster Kitten Weight (Grams)") + 
+  labs(color = "Weight Taken") 
+
+kittens.sep
+```
+## Animating Plots
+
+I wanted to play around a bit more with the gganimate package so I made gifs of the growth charts. 
+
+```{r, eval=FALSE}
+kittentraj + 
+  geom_point(aes(group = seq_along(Date))) +
+  transition_reveal(Date)
+```
+
+![](../../img/kitten trajectories_animation2019-06-28.gif) 
+
+``` {r, eval=FALSE}
+kittens.sep + 
+  geom_point(aes(group = seq_along(Date))) +
+  transition_reveal(Date)
+```
+
+![](../../img/kitten_ind_trajectories_animation2019-06-28.gif) 
+
+## Averaging growth trends
+
+The daily data are a bit messy but look remarkably linear. I'm interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate a logistic regression model that includes the day number and controlling for measurement time and which cat is weighed. 
+
+The intercept is when all independent variables equal 0 or substantively: the average weight in grams for Blue after eating on the first day she came home. 
+
+I added sex to the model but ran into an identification issue. Since all the measurements for each cat are either male or female controls for the cat *and* sex can't be included in the same model. A multilevel model with random intercept for cats can do this and shows that the female cats are slightly smaller than the males but there is not a lot of variation between cats. 
+
+```{r}
+weightlm<-lm(Weight ~ day.num + Pre_post.eating + Cat, kittens.coded)
+summary(weightlm)
+
+```
+
+**The Kittens grow 16.5g per day on average!!**
+
+A few plots can be made to show the predicted weight of a cat over time and differences in the average weight of the cats. 
+
+```{r}
+plot_model(weightlm, type = "pred", terms = c("day.num"))
+
+plot_model(weightlm, type = "pred", terms = c( "Cat"),
+           colors = kittens.coded$color)
+
+```
+
+Blue looks to be really small in the last graph, but it does not take time into account. 
+
+```{r, echo=FALSE,out.width="60%", out.height="60%",fig.cap="Blue is Extra Sweet",fig.show='hold',fig.align='center'}
+knitr::include_graphics(c("Blue_face.JPG"))
+```
+
+To examine trajectory differences, create an interaction term between day and Cat. 
+
+The resulting plot shows the average trajectories of each cat.
+
+```{r}
+weightlm.int<-lm(Weight ~ day.num + Pre_post.eating +  Cat*day.num, kittens.coded)
+
+summary(weightlm.int)
+
+plot_model(weightlm.int, type = "pred", terms = c("day.num", "Cat"),
+           colors = kittens.coded$color)
+
+```
+
+They grow up so fast!
+

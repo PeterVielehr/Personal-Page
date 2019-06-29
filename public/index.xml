@@ -11,6 +11,259 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Measuring and Modeling Foster Kitten Growth: R Stats with Cats</title>
+      <link>/post/measuring-and-modeling-foster-kitten-growth-r-stats-with-cats/</link>
+      <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/measuring-and-modeling-foster-kitten-growth-r-stats-with-cats/</guid>
+      <description>&lt;p&gt;My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found &lt;strong&gt;FIVE&lt;/strong&gt; kittens, most of them were totally submerged in rising water.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../img/box_cats1.JPG&#34; width=&#34;45%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;img src=&#34;../../img/box_cats2.JPG&#34; width=&#34;45%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;When we got the kittens home, I did the best thing I knew how to do: start collecting data on their growth.&lt;/p&gt;
+&lt;p&gt;We color coded their tail tips with the nail polish we had on hand which led to their color names.&lt;/p&gt;
+&lt;p&gt;I made a quick Excel workbook to collect the date, weight in grams, and comments for each cat. A few days later, I forgot to weigh before dinner so I weighed after eating. I realized that it would be a good way to track their food consumption. I’m glad I took the two measures. The kittens got a little older and very wiggly before meals. The measurement error would have another measurement to track average growth.&lt;/p&gt;
+&lt;div id=&#34;the-first-week-of-fostering&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The First Week of Fostering&lt;/h3&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/RtLfeEjcSZs&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-second-week-of-fostering&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Second Week of Fostering&lt;/h3&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/0pHfWmp1_sY&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;
+&lt;/iframe&gt;
+&lt;/div&gt;
+&lt;div id=&#34;now-plot-their-progress&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Now Plot Their Progress&lt;/h1&gt;
+&lt;p&gt;Load some packages and data. I was looking for a way to use purrr and Forcats but I didn’t need then in such a simple case.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(knitr)
+library(tidyverse)
+library(gganimate)
+library(sjPlot)
+
+load(&amp;quot;Kittens.Rda&amp;quot;)
+
+kable(kittens[1:10,])&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Cat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Weight&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Pre_post.eating&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Comments&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-08&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Blue&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;215&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Goopy eyes. Applied antibiotics.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-08&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Green&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;249&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Gave eye antibiotics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-08&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Lavender&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;233&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-08&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maroon&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;252&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-08&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;No Tip&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;255&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Green&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;265&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Diarrhea; eye antibiotics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Blue&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;231&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Diarrhea; eye antibiotics&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Lavender&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;259&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Maroon&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;283&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;No Tip&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;262&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div id=&#34;plotting-kitten-growth&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Plotting Kitten Growth&lt;/h2&gt;
+&lt;p&gt;The raw data need a bit of recoding. I do several things in the next block:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Make a color variable to use in the plots.&lt;/li&gt;
+&lt;li&gt;Re-code the “weight.taken” variable so that it will be correct in the plots.
+&lt;ul&gt;
+&lt;li&gt;Order the weight.taken variable levels so that the before eating comes first.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Make a sex variable based on the cat’s sex.&lt;/li&gt;
+&lt;li&gt;Make a numeric date variable that will be used in the regression. Zero is the first day.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittens.coded&amp;lt;-kittens %&amp;gt;%
+  mutate(color=ifelse(Cat==&amp;quot;No Tip&amp;quot;, &amp;quot;black&amp;quot;, 
+                      ifelse(Cat==&amp;quot;Lavender&amp;quot;, &amp;quot;violet&amp;quot;, tolower(Cat))),
+         weight.taken=case_when(Pre_post.eating==&amp;quot;Pre-eating&amp;quot; ~ &amp;quot;Before Eating&amp;quot;,
+                                Pre_post.eating==&amp;quot;Post-eating&amp;quot; ~ &amp;quot;After Eating&amp;quot;),
+         weight.taken=factor(weight.taken, levels = c(&amp;quot;Before Eating&amp;quot;, &amp;quot;After Eating&amp;quot;)),
+         sex=case_when(Cat==&amp;quot;Blue&amp;quot; | Cat== &amp;quot;Maroon&amp;quot; ~ &amp;quot;Female&amp;quot;,
+                       Cat==&amp;quot;Green&amp;quot; | Cat==&amp;quot;Lavender&amp;quot; | Cat==&amp;quot;No Tip&amp;quot; ~ &amp;quot;Male&amp;quot;),
+         day.num=as.numeric(Date)-18055)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now to plot with ggplot2&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittentraj&amp;lt;-kittens.coded %&amp;gt;%
+  ggplot(aes(Date, Weight, color=Cat)) +
+  geom_line() +
+  scale_color_manual(values = kittens.coded$color)+
+  facet_grid(~ weight.taken) + 
+  ggtitle(&amp;quot;Foster Kitten Weight (Grams)&amp;quot;) 
+
+kittentraj&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/trajectories-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It is also helpful to split the plots by each kitten so that we can see their weight pre- and post-eating easier.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittens.sep&amp;lt;-kittens.coded %&amp;gt;%
+  ggplot(aes(Date, Weight, color=weight.taken)) +
+  geom_line() +
+  facet_wrap(~ Cat) + 
+  ggtitle(&amp;quot;Foster Kitten Weight (Grams)&amp;quot;) + 
+  labs(color = &amp;quot;Weight Taken&amp;quot;) 
+
+kittens.sep&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/individual-1.png&#34; width=&#34;672&#34; /&gt;
+## Animating Plots&lt;/p&gt;
+&lt;p&gt;I wanted to play around a bit more with the gganimate package so I made gifs of the growth charts.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittentraj + 
+  geom_point(aes(group = seq_along(Date))) +
+  transition_reveal(Date)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../img/kitten%20trajectories_animation2019-06-28.gif&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittens.sep + 
+  geom_point(aes(group = seq_along(Date))) +
+  transition_reveal(Date)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../../img/kitten_ind_trajectories_animation2019-06-28.gif&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;averaging-growth-trends&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Averaging growth trends&lt;/h2&gt;
+&lt;p&gt;The daily data are a bit messy but look remarkably linear. I’m interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate a logistic regression model that includes the day number and controlling for measurement time and which cat is weighed.&lt;/p&gt;
+&lt;p&gt;The intercept is when all independent variables equal 0 or substantively: the average weight in grams for Blue after eating on the first day she came home.&lt;/p&gt;
+&lt;p&gt;I added sex to the model but ran into an identification issue. Since all the measurements for each cat are either male or female controls for the cat &lt;em&gt;and&lt;/em&gt; sex can’t be included in the same model. A multilevel model with random intercept for cats can do this and shows that the female cats are slightly smaller than the males but there is not a lot of variation between cats.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;weightlm&amp;lt;-lm(Weight ~ day.num + Pre_post.eating + Cat, kittens.coded)
+summary(weightlm)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## lm(formula = Weight ~ day.num + Pre_post.eating + Cat, data = kittens.coded)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -44.245  -8.037  -0.588   7.618  40.804 
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(&amp;gt;|t|)    
+## (Intercept)               243.2866     3.4022  71.509  &amp;lt; 2e-16 ***
+## day.num                    16.5599     0.1946  85.099  &amp;lt; 2e-16 ***
+## Pre_post.eatingPre-eating -17.5656     2.1596  -8.134 1.15e-13 ***
+## CatGreen                   28.5020     3.3920   8.403 2.38e-14 ***
+## CatLavender                 7.8313     3.3920   2.309 0.022252 *  
+## CatMaroon                  11.4242     3.3914   3.369 0.000949 ***
+## CatNo Tip                  25.3505     3.3920   7.474 5.02e-12 ***
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Residual standard error: 13.78 on 158 degrees of freedom
+## Multiple R-squared:  0.9797, Adjusted R-squared:  0.9789 
+## F-statistic:  1269 on 6 and 158 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;The Kittens grow 16.5g per day on average!!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A few plots can be made to show the predicted weight of a cat over time and differences in the average weight of the cats.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_model(weightlm, type = &amp;quot;pred&amp;quot;, terms = c(&amp;quot;day.num&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_model(weightlm, type = &amp;quot;pred&amp;quot;, terms = c( &amp;quot;Cat&amp;quot;),
+           colors = kittens.coded$color)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-6-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Blue looks to be really small in the last graph, but it does not take time into account.&lt;/p&gt;
+&lt;div class=&#34;figure&#34; style=&#34;text-align: center&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-7&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;Blue_face.JPG&#34; alt=&#34;Blue is Extra Sweet&#34; width=&#34;60%&#34; height=&#34;60%&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Blue is Extra Sweet
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;To examine trajectory differences, create an interaction term between day and Cat.&lt;/p&gt;
+&lt;p&gt;The resulting plot shows the average trajectories of each cat.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;weightlm.int&amp;lt;-lm(Weight ~ day.num + Pre_post.eating +  Cat*day.num, kittens.coded)
+
+summary(weightlm.int)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## lm(formula = Weight ~ day.num + Pre_post.eating + Cat * day.num, 
+##     data = kittens.coded)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -38.766  -8.257  -0.451   7.525  31.670 
+## 
+## Coefficients:
+##                           Estimate Std. Error t value Pr(&amp;gt;|t|)    
+## (Intercept)               253.5011     5.0802  49.900  &amp;lt; 2e-16 ***
+## day.num                    15.5791     0.4178  37.284  &amp;lt; 2e-16 ***
+## Pre_post.eatingPre-eating -17.4895     2.0853  -8.387 2.97e-14 ***
+## CatGreen                   23.5565     6.9936   3.368 0.000956 ***
+## CatLavender               -15.1276     6.9894  -2.164 0.031977 *  
+## CatMaroon                   0.6035     6.9893   0.086 0.931304    
+## CatNo Tip                  12.7692     6.9936   1.826 0.069811 .  
+## day.num:CatGreen            0.4728     0.5910   0.800 0.424933    
+## day.num:CatLavender         2.1963     0.5908   3.717 0.000281 ***
+## day.num:CatMaroon           1.0350     0.5908   1.752 0.081763 .  
+## day.num:CatNo Tip           1.2032     0.5910   2.036 0.043485 *  
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Residual standard error: 13.29 on 154 degrees of freedom
+## Multiple R-squared:  0.9816, Adjusted R-squared:  0.9804 
+## F-statistic: 819.5 on 10 and 154 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_model(weightlm.int, type = &amp;quot;pred&amp;quot;, terms = c(&amp;quot;day.num&amp;quot;, &amp;quot;Cat&amp;quot;),
+           colors = kittens.coded$color)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;They grow up so fast!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Mapping Mass Incarceration in the United States with Leaflet for R and Shiny</title>
       <link>/post/mapping-mass-incarceration/</link>
       <pubDate>Sat, 26 Jan 2019 00:00:00 +0000</pubDate>
