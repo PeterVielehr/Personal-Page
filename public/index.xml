@@ -41,7 +41,7 @@ library(sjPlot)
 
 load(&amp;quot;Kittens.Rda&amp;quot;)
 
-kable(kittens[1:10,])&lt;/code&gt;&lt;/pre&gt;
+kable(head(kittens))&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
@@ -94,34 +94,6 @@ kable(kittens[1:10,])&lt;/code&gt;&lt;/pre&gt;
 &lt;td align=&#34;right&#34;&gt;265&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;Diarrhea; eye antibiotics&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Blue&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;231&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Diarrhea; eye antibiotics&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Lavender&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;259&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Maroon&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;283&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;2019-06-09&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;No Tip&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;262&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Pre-eating&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

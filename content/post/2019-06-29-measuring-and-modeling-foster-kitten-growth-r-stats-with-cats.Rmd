@@ -55,7 +55,7 @@ library(sjPlot)
 
 load("Kittens.Rda")
 
-kable(kittens[1:10,])
+kable(head(kittens))
 ```
 
 ## Plotting Kitten Growth
