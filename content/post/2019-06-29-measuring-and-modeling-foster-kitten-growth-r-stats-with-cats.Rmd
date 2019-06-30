@@ -44,7 +44,7 @@ I made a quick Excel workbook to collect the date, weight in grams, and comments
 
 # Now Plot Their Progress
 
-Load some packages and data. I used the forcats package and was looking for a way to use purrr but didn't have a good use case.
+Load some packages and data. I used the forcats package to recode factors and was looking for a way to use purrr but didn't have a good use case.
 
 ```{r }
 

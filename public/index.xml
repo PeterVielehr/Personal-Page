@@ -33,7 +33,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;now-plot-their-progress&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Now Plot Their Progress&lt;/h1&gt;
-&lt;p&gt;Load some packages and data. I used the forcats package and was looking for a way to use purrr but didn’t have a good use case.&lt;/p&gt;
+&lt;p&gt;Load some packages and data. I used the forcats package to recode factors and was looking for a way to use purrr but didn’t have a good use case.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(knitr)
 library(tidyverse)
 library(gganimate)
