@@ -44,7 +44,7 @@ I made a quick Excel workbook to collect the date, weight in grams, and comments
 
 # Now Plot Their Progress
 
-Load some packages and data. I was looking for a way to use purrr and Forcats but I didn't need then in such a simple case.
+Load some packages and data. I used the forcats package and was looking for a way to use purrr but didn't have a good use case.
 
 ```{r }
 
@@ -70,13 +70,17 @@ The raw data need a bit of recoding. I do several things in the next block:
 
 ```{r recode variables}
 kittens.coded<-kittens %>%
-  mutate(color=ifelse(Cat=="No Tip", "black", 
-                      ifelse(Cat=="Lavender", "violet", tolower(Cat))),
-         weight.taken=case_when(Pre_post.eating=="Pre-eating" ~ "Before Eating",
-                                Pre_post.eating=="Post-eating" ~ "After Eating"),
-         weight.taken=factor(weight.taken, levels = c("Before Eating", "After Eating")),
-         sex=case_when(Cat=="Blue" | Cat== "Maroon" ~ "Female",
-                       Cat=="Green" | Cat=="Lavender" | Cat=="No Tip" ~ "Male"),
+  mutate(color=fct_recode(Cat, 
+                          "black" = "No Tip",
+                          "violet" = "Lavender" ),
+         color=tolower(color),
+         weight.taken=fct_recode(Pre_post.eating,
+                                 "Before Eating" = "Pre-eating" ,
+                                 "After Eating" = "Post-eating"),
+         weight.taken=fct_relevel(weight.taken,"Before Eating"),
+         sex=fct_collapse(Cat,
+                          female= c("Blue", "Maroon"),
+                          male= c("Green", "Lavender", "No Tip")),
          day.num=as.numeric(Date)-18055)
 ```
 

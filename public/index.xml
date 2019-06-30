@@ -33,7 +33,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;now-plot-their-progress&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Now Plot Their Progress&lt;/h1&gt;
-&lt;p&gt;Load some packages and data. I was looking for a way to use purrr and Forcats but I didn’t need then in such a simple case.&lt;/p&gt;
+&lt;p&gt;Load some packages and data. I used the forcats package and was looking for a way to use purrr but didn’t have a good use case.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(knitr)
 library(tidyverse)
 library(gganimate)
@@ -110,13 +110,17 @@ kable(head(kittens))&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;Make a numeric date variable that will be used in the regression. Zero is the first day.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittens.coded&amp;lt;-kittens %&amp;gt;%
-  mutate(color=ifelse(Cat==&amp;quot;No Tip&amp;quot;, &amp;quot;black&amp;quot;, 
-                      ifelse(Cat==&amp;quot;Lavender&amp;quot;, &amp;quot;violet&amp;quot;, tolower(Cat))),
-         weight.taken=case_when(Pre_post.eating==&amp;quot;Pre-eating&amp;quot; ~ &amp;quot;Before Eating&amp;quot;,
-                                Pre_post.eating==&amp;quot;Post-eating&amp;quot; ~ &amp;quot;After Eating&amp;quot;),
-         weight.taken=factor(weight.taken, levels = c(&amp;quot;Before Eating&amp;quot;, &amp;quot;After Eating&amp;quot;)),
-         sex=case_when(Cat==&amp;quot;Blue&amp;quot; | Cat== &amp;quot;Maroon&amp;quot; ~ &amp;quot;Female&amp;quot;,
-                       Cat==&amp;quot;Green&amp;quot; | Cat==&amp;quot;Lavender&amp;quot; | Cat==&amp;quot;No Tip&amp;quot; ~ &amp;quot;Male&amp;quot;),
+  mutate(color=fct_recode(Cat, 
+                          &amp;quot;black&amp;quot; = &amp;quot;No Tip&amp;quot;,
+                          &amp;quot;violet&amp;quot; = &amp;quot;Lavender&amp;quot; ),
+         color=tolower(color),
+         weight.taken=fct_recode(Pre_post.eating,
+                                 &amp;quot;Before Eating&amp;quot; = &amp;quot;Pre-eating&amp;quot; ,
+                                 &amp;quot;After Eating&amp;quot; = &amp;quot;Post-eating&amp;quot;),
+         weight.taken=fct_relevel(weight.taken,&amp;quot;Before Eating&amp;quot;),
+         sex=fct_collapse(Cat,
+                          female= c(&amp;quot;Blue&amp;quot;, &amp;quot;Maroon&amp;quot;),
+                          male= c(&amp;quot;Green&amp;quot;, &amp;quot;Lavender&amp;quot;, &amp;quot;No Tip&amp;quot;)),
          day.num=as.numeric(Date)-18055)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now to plot with ggplot2&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittentraj&amp;lt;-kittens.coded %&amp;gt;%
