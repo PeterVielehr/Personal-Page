@@ -12,6 +12,7 @@ header:
   preview: yes
 ---
 
+*Data Updated `r Sys.Date()`*
 
 ```{r setup, include=FALSE}
 
@@ -115,21 +116,21 @@ kittens.sep
 
 I wanted to play around a bit more with the gganimate package so I made gifs of the growth charts. 
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 kittentraj + 
   geom_point(aes(group = seq_along(Date))) +
   transition_reveal(Date)
 ```
 
-![](../../img/kitten trajectories_animation2019-06-28.gif) 
 
-``` {r, eval=FALSE}
+
+``` {r, eval=TRUE}
 kittens.sep + 
   geom_point(aes(group = seq_along(Date))) +
   transition_reveal(Date)
 ```
 
-![](../../img/kitten_ind_trajectories_animation2019-06-28.gif) 
+
 
 ## Averaging growth trends
 
@@ -145,7 +146,7 @@ summary(weightlm)
 
 ```
 
-**The Kittens grow 16.5g per day on average!!**
+**The Kittens grow `r paste0(round(coef(weightlm)["day.num"], digits = 1), "g")` per day on average!!**
 
 A few plots can be made to show the predicted weight of a cat over time and differences in the average weight of the cats. 
 

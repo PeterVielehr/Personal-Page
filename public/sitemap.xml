@@ -236,7 +236,7 @@
     
     <url>
     
-      <loc>/tags/hiking/</loc>
+      <loc>/categories/hiking/</loc>
       <lastmod>2018-05-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -246,7 +246,7 @@
     
     <url>
     
-      <loc>/categories/hiking/</loc>
+      <loc>/tags/hiking/</loc>
       <lastmod>2018-05-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>

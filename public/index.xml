@@ -16,7 +16,8 @@
       <pubDate>Sat, 29 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/measuring-and-modeling-foster-kitten-growth-r-stats-with-cats/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;../../img/box_cats1.JPG&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;em&gt;Data Updated 2019-07-04&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../img/box_cats1.JPG&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found &lt;strong&gt;FIVE&lt;/strong&gt; kittens, most of them were totally submerged in rising water.&lt;/p&gt;
 &lt;p&gt;When we got the kittens home, I did the best thing I knew how to do: start collecting data on their growth.&lt;/p&gt;
 &lt;p&gt;We color coded their tail tips with the nail polish we had on hand which led to their color names.&lt;/p&gt;
@@ -149,11 +150,11 @@ kittens.sep&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittentraj + 
   geom_point(aes(group = seq_along(Date))) +
   transition_reveal(Date)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;../../img/kitten%20trajectories_animation2019-06-28.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-2-1.gif&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kittens.sep + 
   geom_point(aes(group = seq_along(Date))) +
   transition_reveal(Date)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;../../img/kitten_ind_trajectories_animation2019-06-28.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-3-1.gif&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;averaging-growth-trends&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Averaging growth trends&lt;/h2&gt;
@@ -168,24 +169,24 @@ summary(weightlm)&lt;/code&gt;&lt;/pre&gt;
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -44.245  -8.037  -0.588   7.618  40.804 
+## -46.721 -13.330  -0.898  11.545  67.354 
 ## 
 ## Coefficients:
 ##                           Estimate Std. Error t value Pr(&amp;gt;|t|)    
-## (Intercept)               243.2866     3.4022  71.509  &amp;lt; 2e-16 ***
-## day.num                    16.5599     0.1946  85.099  &amp;lt; 2e-16 ***
-## Pre_post.eatingPre-eating -17.5656     2.1596  -8.134 1.15e-13 ***
-## CatGreen                   28.5020     3.3920   8.403 2.38e-14 ***
-## CatLavender                 7.8313     3.3920   2.309 0.022252 *  
-## CatMaroon                  11.4242     3.3914   3.369 0.000949 ***
-## CatNo Tip                  25.3505     3.3920   7.474 5.02e-12 ***
+## (Intercept)               223.1480     4.4806  49.803  &amp;lt; 2e-16 ***
+## day.num                    17.9733     0.2032  88.473  &amp;lt; 2e-16 ***
+## Pre_post.eatingPre-eating -18.3962     2.8828  -6.381 1.22e-09 ***
+## CatGreen                   37.8633     4.5103   8.395 8.83e-15 ***
+## CatLavender                25.1123     4.5103   5.568 8.33e-08 ***
+## CatMaroon                  18.4634     4.5097   4.094 6.17e-05 ***
+## CatNo Tip                  36.9365     4.5103   8.189 3.18e-14 ***
 ## ---
 ## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
 ## 
-## Residual standard error: 13.78 on 158 degrees of freedom
-## Multiple R-squared:  0.9797, Adjusted R-squared:  0.9789 
-## F-statistic:  1269 on 6 and 158 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;The Kittens grow 16.5g per day on average!!&lt;/strong&gt;&lt;/p&gt;
+## Residual standard error: 20.42 on 198 degrees of freedom
+## Multiple R-squared:  0.9766, Adjusted R-squared:  0.9759 
+## F-statistic:  1380 on 6 and 198 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;The Kittens grow 18g per day on average!!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;A few plots can be made to show the predicted weight of a cat over time and differences in the average weight of the cats.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_model(weightlm, type = &amp;quot;pred&amp;quot;, terms = c(&amp;quot;day.num&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
@@ -206,27 +207,27 @@ summary(weightlm.int)&lt;/code&gt;&lt;/pre&gt;
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -38.766  -8.257  -0.451   7.525  31.670 
+## -44.058  -9.966  -0.936  11.593  44.649 
 ## 
 ## Coefficients:
 ##                           Estimate Std. Error t value Pr(&amp;gt;|t|)    
-## (Intercept)               253.5011     5.0802  49.900  &amp;lt; 2e-16 ***
-## day.num                    15.5791     0.4178  37.284  &amp;lt; 2e-16 ***
-## Pre_post.eatingPre-eating -17.4895     2.0853  -8.387 2.97e-14 ***
-## CatGreen                   23.5565     6.9936   3.368 0.000956 ***
-## CatLavender               -15.1276     6.9894  -2.164 0.031977 *  
-## CatMaroon                   0.6035     6.9893   0.086 0.931304    
-## CatNo Tip                  12.7692     6.9936   1.826 0.069811 .  
-## day.num:CatGreen            0.4728     0.5910   0.800 0.424933    
-## day.num:CatLavender         2.1963     0.5908   3.717 0.000281 ***
-## day.num:CatMaroon           1.0350     0.5908   1.752 0.081763 .  
-## day.num:CatNo Tip           1.2032     0.5910   2.036 0.043485 *  
+## (Intercept)               252.9622     5.8871  42.969  &amp;lt; 2e-16 ***
+## day.num                    15.6599     0.3874  40.422  &amp;lt; 2e-16 ***
+## Pre_post.eatingPre-eating -18.2099     2.4816  -7.338 5.79e-12 ***
+## CatGreen                   10.2569     8.0715   1.271 0.205341    
+## CatLavender               -34.0351     8.0683  -4.218 3.77e-05 ***
+## CatMaroon                  -6.6615     8.0682  -0.826 0.410018    
+## CatNo Tip                  -0.8333     8.0715  -0.103 0.917884    
+## day.num:CatGreen            2.1352     0.5474   3.901 0.000132 ***
+## day.num:CatLavender         4.5759     0.5473   8.362 1.19e-14 ***
+## day.num:CatMaroon           1.9436     0.5472   3.552 0.000481 ***
+## day.num:CatNo Tip           2.9215     0.5474   5.337 2.62e-07 ***
 ## ---
 ## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
 ## 
-## Residual standard error: 13.29 on 154 degrees of freedom
-## Multiple R-squared:  0.9816, Adjusted R-squared:  0.9804 
-## F-statistic: 819.5 on 10 and 154 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
+## Residual standard error: 17.57 on 194 degrees of freedom
+## Multiple R-squared:  0.9831, Adjusted R-squared:  0.9822 
+## F-statistic:  1126 on 10 and 194 DF,  p-value: &amp;lt; 2.2e-16&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_model(weightlm.int, type = &amp;quot;pred&amp;quot;, terms = c(&amp;quot;day.num&amp;quot;, &amp;quot;Cat&amp;quot;),
            colors = kittens.coded$color)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
