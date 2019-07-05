@@ -156,7 +156,7 @@ kittens.sep</code></pre>
 </div>
 <div id="averaging-growth-trends" class="section level2">
 <h2>Averaging growth trends</h2>
-<p>The daily data are a bit messy but look remarkably linear. I’m interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate a logistic regression model that includes the day number and controlling for measurement time and which cat is weighed.</p>
+<p>The daily data are a bit messy but look remarkably linear. I’m interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate an OLS regression model that includes the day number and controlling for measurement time and which cat is weighed.</p>
 <p>The intercept is when all independent variables equal 0 or substantively: the average weight in grams for Blue after eating on the first day she came home.</p>
 <p>I added sex to the model but ran into an identification issue. Since all the measurements for each cat are either male or female controls for the cat <em>and</em> sex can’t be included in the same model. A multilevel model with random intercept for cats can do this and shows that the female cats are slightly smaller than the males but there is not a lot of variation between cats.</p>
 <pre class="r"><code>weightlm&lt;-lm(Weight ~ day.num + Pre_post.eating + Cat, kittens.coded)

@@ -134,7 +134,7 @@ kittens.sep +
 
 ## Averaging growth trends
 
-The daily data are a bit messy but look remarkably linear. I'm interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate a logistic regression model that includes the day number and controlling for measurement time and which cat is weighed. 
+The daily data are a bit messy but look remarkably linear. I'm interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate an OLS regression model that includes the day number and controlling for measurement time and which cat is weighed. 
 
 The intercept is when all independent variables equal 0 or substantively: the average weight in grams for Blue after eating on the first day she came home. 
 
