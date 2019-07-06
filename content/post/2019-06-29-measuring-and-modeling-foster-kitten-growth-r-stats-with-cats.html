@@ -14,7 +14,7 @@ header:
 
 
 
-<p><em>Data Updated 2019-07-04</em></p>
+<p><em>Data Updated 2019-07-05</em></p>
 <p><img src="../../img/box_cats1.JPG" /></p>
 <p>My partner brought home a box of three week old kittens that had been brought to her work. The man who found them said that during a heavy rainstorm heard tiny meows in his yard and then saw a little kitten face scrambling to get out of a depression. He went to rescue the baby kitten and found <strong>FIVE</strong> kittens, most of them were totally submerged in rising water.</p>
 <p>When we got the kittens home, I did the best thing I knew how to do: start collecting data on their growth.</p>
@@ -32,7 +32,7 @@ header:
 </div>
 <div id="now-plot-their-progress" class="section level1">
 <h1>Now Plot Their Progress</h1>
-<p>Load some packages and data. I used the forcats package to recode factors and was looking for a way to use purrr but didn’t have a good use case.</p>
+<p>Load some packages and data. I used the forcats package to re-code factors and was looking for a way to use purrr but didn’t have a good use case.</p>
 <pre class="r"><code>library(knitr)
 library(tidyverse)
 library(gganimate)
@@ -98,7 +98,7 @@ kable(head(kittens))</code></pre>
 </table>
 <div id="plotting-kitten-growth" class="section level2">
 <h2>Plotting Kitten Growth</h2>
-<p>The raw data need a bit of recoding. I do several things in the next block:</p>
+<p>The raw data need a bit of re-coding. I do several things in the next block:</p>
 <ol style="list-style-type: decimal">
 <li>Make a color variable to use in the plots.</li>
 <li>Re-code the “weight.taken” variable so that it will be correct in the plots.
@@ -157,6 +157,7 @@ kittens.sep</code></pre>
 <div id="averaging-growth-trends" class="section level2">
 <h2>Averaging growth trends</h2>
 <p>The daily data are a bit messy but look remarkably linear. I’m interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate an OLS regression model that includes the day number and controlling for measurement time and which cat is weighed.</p>
+<p><strong>Update 7/5/2019: The growth trend is no longer looking as linear. After the linear model, below, I estimate a curvilinear model</strong></p>
 <p>The intercept is when all independent variables equal 0 or substantively: the average weight in grams for Blue after eating on the first day she came home.</p>
 <p>I added sex to the model but ran into an identification issue. Since all the measurements for each cat are either male or female controls for the cat <em>and</em> sex can’t be included in the same model. A multilevel model with random intercept for cats can do this and shows that the female cats are slightly smaller than the males but there is not a lot of variation between cats.</p>
 <pre class="r"><code>weightlm&lt;-lm(Weight ~ day.num + Pre_post.eating + Cat, kittens.coded)
@@ -167,24 +168,24 @@ summary(weightlm)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -46.721 -13.330  -0.898  11.545  67.354 
+## -52.725 -15.403  -0.788  12.233  82.661 
 ## 
 ## Coefficients:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)               223.1480     4.4806  49.803  &lt; 2e-16 ***
-## day.num                    17.9733     0.2032  88.473  &lt; 2e-16 ***
-## Pre_post.eatingPre-eating -18.3962     2.8828  -6.381 1.22e-09 ***
-## CatGreen                   37.8633     4.5103   8.395 8.83e-15 ***
-## CatLavender                25.1123     4.5103   5.568 8.33e-08 ***
-## CatMaroon                  18.4634     4.5097   4.094 6.17e-05 ***
-## CatNo Tip                  36.9365     4.5103   8.189 3.18e-14 ***
+## (Intercept)                214.326      4.995  42.913  &lt; 2e-16 ***
+## day.num                     18.524      0.207  89.491  &lt; 2e-16 ***
+## Pre_post.eatingPre-eating  -19.228      3.228  -5.956 1.03e-08 ***
+## CatGreen                    44.538      5.069   8.787 4.63e-16 ***
+## CatLavender                 33.862      5.069   6.681 1.96e-10 ***
+## CatMaroon                   19.311      5.068   3.810 0.000181 ***
+## CatNo Tip                   41.472      5.069   8.182 2.31e-14 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 20.42 on 198 degrees of freedom
-## Multiple R-squared:  0.9766, Adjusted R-squared:  0.9759 
-## F-statistic:  1380 on 6 and 198 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p><strong>The Kittens grow 18g per day on average!!</strong></p>
+## Residual standard error: 24.04 on 218 degrees of freedom
+## Multiple R-squared:  0.9746, Adjusted R-squared:  0.9739 
+## F-statistic:  1396 on 6 and 218 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><strong>The Kittens grow 18.5g per day on average!!</strong></p>
 <p>A few plots can be made to show the predicted weight of a cat over time and differences in the average weight of the cats.</p>
 <pre class="r"><code>plot_model(weightlm, type = &quot;pred&quot;, terms = c(&quot;day.num&quot;))</code></pre>
 <p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
@@ -205,30 +206,105 @@ summary(weightlm.int)</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -44.058  -9.966  -0.936  11.593  44.649 
+## -52.455 -12.685  -0.754  11.899  56.239 
 ## 
 ## Coefficients:
 ##                           Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)               252.9622     5.8871  42.969  &lt; 2e-16 ***
-## day.num                    15.6599     0.3874  40.422  &lt; 2e-16 ***
-## Pre_post.eatingPre-eating -18.2099     2.4816  -7.338 5.79e-12 ***
-## CatGreen                   10.2569     8.0715   1.271 0.205341    
-## CatLavender               -34.0351     8.0683  -4.218 3.77e-05 ***
-## CatMaroon                  -6.6615     8.0682  -0.826 0.410018    
-## CatNo Tip                  -0.8333     8.0715  -0.103 0.917884    
-## day.num:CatGreen            2.1352     0.5474   3.901 0.000132 ***
-## day.num:CatLavender         4.5759     0.5473   8.362 1.19e-14 ***
-## day.num:CatMaroon           1.9436     0.5472   3.552 0.000481 ***
-## day.num:CatNo Tip           2.9215     0.5474   5.337 2.62e-07 ***
+## (Intercept)               250.8620     6.3299  39.631  &lt; 2e-16 ***
+## day.num                    15.9308     0.3811  41.804  &lt; 2e-16 ***
+## Pre_post.eatingPre-eating -18.9895     2.6751  -7.099 1.83e-11 ***
+## CatGreen                    2.5347     8.6948   0.292  0.77093    
+## CatLavender               -40.2220     8.6920  -4.627 6.41e-06 ***
+## CatMaroon                  -3.9021     8.6918  -0.449  0.65393    
+## CatNo Tip                  -2.6179     8.6948  -0.301  0.76364    
+## day.num:CatGreen            2.9716     0.5387   5.517 9.93e-08 ***
+## day.num:CatLavender         5.2421     0.5385   9.734  &lt; 2e-16 ***
+## day.num:CatMaroon           1.6424     0.5385   3.050  0.00258 ** 
+## day.num:CatNo Tip           3.1192     0.5387   5.791 2.48e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 17.57 on 194 degrees of freedom
-## Multiple R-squared:  0.9831, Adjusted R-squared:  0.9822 
-## F-statistic:  1126 on 10 and 194 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 19.91 on 214 degrees of freedom
+## Multiple R-squared:  0.9829, Adjusted R-squared:  0.9821 
+## F-statistic:  1232 on 10 and 214 DF,  p-value: &lt; 2.2e-16</code></pre>
 <pre class="r"><code>plot_model(weightlm.int, type = &quot;pred&quot;, terms = c(&quot;day.num&quot;, &quot;Cat&quot;),
            colors = kittens.coded$color)</code></pre>
 <p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>They grow up so fast!</p>
+</div>
+<div id="curvilinear-growth-model" class="section level2">
+<h2>Curvilinear Growth Model</h2>
+<p>In the OLS, I add a polynomial term for day number. The I() function lets you evaluate the term inside the function without the +, *, or ^ being interpreted as a part of the model equation.</p>
+<pre class="r"><code>weight.curv&lt;-lm(Weight ~ day.num + I(day.num^2) + Pre_post.eating +  Cat, kittens.coded)
+
+summary(weight.curv)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Weight ~ day.num + I(day.num^2) + Pre_post.eating + 
+##     Cat, data = kittens.coded)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -67.444 -12.680  -0.551  10.669  60.305 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               246.24198    5.74183  42.886  &lt; 2e-16 ***
+## day.num                    12.44137    0.73914  16.832  &lt; 2e-16 ***
+## I(day.num^2)                0.21225    0.02502   8.484 3.39e-15 ***
+## Pre_post.eatingPre-eating -21.75489    2.81984  -7.715 4.35e-13 ***
+## CatGreen                   44.59455    4.40238  10.130  &lt; 2e-16 ***
+## CatLavender                33.80545    4.40238   7.679 5.43e-13 ***
+## CatMaroon                  19.31111    4.40193   4.387 1.79e-05 ***
+## CatNo Tip                  41.52789    4.40238   9.433  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 20.88 on 217 degrees of freedom
+## Multiple R-squared:  0.981,  Adjusted R-squared:  0.9803 
+## F-statistic:  1597 on 7 and 217 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>plot_model(weight.curv, type = &quot;pred&quot;, terms = c(&quot;day.num&quot;),
+           colors = kittens.coded$color)</code></pre>
+<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/curvilinear-1.png" width="672" /></p>
+<p>Adding interaction terms for day number and the squared term with Cat estimates a curvilinear trajectory for each cat.</p>
+<pre class="r"><code>weight.curv.int&lt;-lm(Weight ~ day.num*Cat + I(day.num^2)*Cat + Pre_post.eating +  Cat, kittens.coded)
+
+summary(weight.curv.int)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Weight ~ day.num * Cat + I(day.num^2) * Cat + Pre_post.eating + 
+##     Cat, data = kittens.coded)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -42.966  -8.278  -0.452   8.437  37.763 
+## 
+## Coefficients:
+##                            Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               256.15351    7.09505  36.103  &lt; 2e-16 ***
+## day.num                    15.18561    1.11710  13.594  &lt; 2e-16 ***
+## CatGreen                   39.45980    9.88212   3.993 9.03e-05 ***
+## CatLavender                11.85930    9.87663   1.201  0.23121    
+## CatMaroon                  10.17563    9.87628   1.030  0.30406    
+## CatNo Tip                  28.61984    9.88212   2.896  0.00418 ** 
+## I(day.num^2)                0.02553    0.03791   0.673  0.50140    
+## Pre_post.eatingPre-eating -21.87344    1.92291 -11.375  &lt; 2e-16 ***
+## day.num:CatGreen           -4.35356    1.57924  -2.757  0.00635 ** 
+## day.num:CatLavender        -5.15163    1.57882  -3.263  0.00129 ** 
+## day.num:CatMaroon          -1.16402    1.57864  -0.737  0.46173    
+## day.num:CatNo Tip          -3.07218    1.57924  -1.945  0.05307 .  
+## CatGreen:I(day.num^2)       0.25593    0.05360   4.775 3.38e-06 ***
+## CatLavender:I(day.num^2)    0.36375    0.05359   6.787 1.16e-10 ***
+## CatMaroon:I(day.num^2)      0.09823    0.05359   1.833  0.06822 .  
+## CatNo Tip:I(day.num^2)      0.21625    0.05360   4.034 7.67e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 14.22 on 209 degrees of freedom
+## Multiple R-squared:  0.9915, Adjusted R-squared:  0.9909 
+## F-statistic:  1623 on 15 and 209 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>plot_model(weight.curv.int, type = &quot;pred&quot;, terms = c(&quot;day.num&quot;, &quot;Cat&quot;),
+           colors = kittens.coded$color)</code></pre>
+<p><img src="/post/2019-06-29-measuring-and-modeling-foster-kitten-growth-r-stats-with-cats_files/figure-html/curvilinear%20interaction-1.png" width="672" /></p>
 </div>
 </div>

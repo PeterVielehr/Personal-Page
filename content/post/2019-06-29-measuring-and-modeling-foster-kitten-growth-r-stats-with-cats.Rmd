@@ -45,7 +45,7 @@ I made a quick Excel workbook to collect the date, weight in grams, and comments
 
 # Now Plot Their Progress
 
-Load some packages and data. I used the forcats package to recode factors and was looking for a way to use purrr but didn't have a good use case.
+Load some packages and data. I used the forcats package to re-code factors and was looking for a way to use purrr but didn't have a good use case.
 
 ```{r }
 
@@ -61,7 +61,7 @@ kable(head(kittens))
 
 ## Plotting Kitten Growth
 
-The raw data need a bit of recoding. I do several things in the next block:
+The raw data need a bit of re-coding. I do several things in the next block:
 
 1. Make a color variable to use in the plots.
 2. Re-code the "weight.taken" variable so that it will be correct in the plots.
@@ -136,6 +136,8 @@ kittens.sep +
 
 The daily data are a bit messy but look remarkably linear. I'm interested in how fast they are growing every day and whether the cats are differing in their growth trajectories. To test this, I can estimate an OLS regression model that includes the day number and controlling for measurement time and which cat is weighed. 
 
+**Update 7/5/2019: The growth trend is no longer looking as linear. After the linear model, below, I estimate a curvilinear model**
+
 The intercept is when all independent variables equal 0 or substantively: the average weight in grams for Blue after eating on the first day she came home. 
 
 I added sex to the model but ran into an identification issue. Since all the measurements for each cat are either male or female controls for the cat *and* sex can't be included in the same model. A multilevel model with random intercept for cats can do this and shows that the female cats are slightly smaller than the males but there is not a lot of variation between cats. 
@@ -181,3 +183,26 @@ plot_model(weightlm.int, type = "pred", terms = c("day.num", "Cat"),
 
 They grow up so fast!
 
+## Curvilinear Growth Model
+
+In the OLS, I add a polynomial term for day number. The I() function lets you evaluate the term inside the function without the +, *, or ^ being interpreted as a part of the model equation. 
+
+```{r curvilinear}
+weight.curv<-lm(Weight ~ day.num + I(day.num^2) + Pre_post.eating +  Cat, kittens.coded)
+
+summary(weight.curv)
+
+plot_model(weight.curv, type = "pred", terms = c("day.num"),
+           colors = kittens.coded$color)
+```
+
+Adding interaction terms for day number and the squared term with Cat estimates a curvilinear trajectory for each cat. 
+
+```{r curvilinear interaction}
+weight.curv.int<-lm(Weight ~ day.num*Cat + I(day.num^2)*Cat + Pre_post.eating +  Cat, kittens.coded)
+
+summary(weight.curv.int)
+
+plot_model(weight.curv.int, type = "pred", terms = c("day.num", "Cat"),
+           colors = kittens.coded$color)
+```
