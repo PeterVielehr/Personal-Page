@@ -85,7 +85,9 @@ kittens.coded<-kittens %>%
          day.num=as.numeric(Date)-18055)
 ```
 
-Now to plot with ggplot2
+Now to plot with ggplot2.
+
+*Note: No Tip has some missing days because someone peed on my data collection form before I had a chance to record those days*
 
 ```{r trajectories, echo=T}
 kittentraj<-kittens.coded %>%
@@ -116,7 +118,7 @@ kittens.sep
 
 I wanted to play around a bit more with the gganimate package so I made gifs of the growth charts. 
 
-```{r, eval=TRUE}
+```{r eval=TRUE, message=FALSE, warning=FALSE}
 kittentraj + 
   geom_point(aes(group = seq_along(Date))) +
   transition_reveal(Date)
@@ -124,7 +126,7 @@ kittentraj +
 
 
 
-``` {r, eval=TRUE}
+``` {r, eval=TRUE, message=FALSE, warning=FALSE}
 kittens.sep + 
   geom_point(aes(group = seq_along(Date))) +
   transition_reveal(Date)
